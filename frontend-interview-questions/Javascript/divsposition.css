@@ -1,37 +1,27 @@
 /* center a div */
 
 body {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; */
-  height: 90vh;
+  height: var(--body-height);
+}
+.positionclass {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .grandparent {
-  width: 500px;
-  height: 200px;
-  border: 1px solid black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: var(--grandparent-width);
+  height: var(--grandparent-height);
+  border: 1px solid var(--BLACK);
 }
 .parent {
-  width: 300px;
-  height: 150px;
-  border: 1px solid black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: var(--parent-width);
+  height: var(--parent-height);
+  border: 1px solid var(--BLACK);
 }
 
 .child {
-  width: 150px;
-  height: 70px;
-  border: 1px solid black;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: var(--child-width);
+  height: var(--child-height);
+  border: 1px solid var(--BLACK);
 }

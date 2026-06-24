@@ -1,0 +1,11 @@
+:root {
+  --BLACK: black;
+  --body-height: 90vh;
+  --grandparent-width: 500px;
+  --parent-width: 300px;
+  --child-width: 150px;
+  /* 200 150 70 */
+  --grandparent-height: 200px;
+  --parent-height: 150px;
+  --child-height: 70px;
+}

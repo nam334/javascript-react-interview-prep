@@ -1,44 +1,94 @@
-const accordiandata = [
-  {
-    id: 1,
-    title: "What is Closure in JavaScript?",
-    content:
-      "A closure allows a function to access variables from its outer scope even after the outer function has returned.",
-  },
-  {
-    id: 2,
-    title: "What is Hoisting?",
-    content:
-      "Hoisting is JavaScript's behavior of moving declarations to the top of their scope during compilation.",
-  },
-  {
-    id: 3,
-    title: "What is useMemo?",
-    content:
-      "useMemo memoizes a computed value and recalculates it only when dependencies change.",
-  },
-];
+// // const accordiandata = [
+// //   {
+// //     id: 1,
+// //     title: "What is Closure in JavaScript?",
+// //     content:
+// //       "A closure allows a function to access variables from its outer scope even after the outer function has returned.",
+// //   },
+// //   {
+// //     id: 2,
+// //     title: "What is Hoisting?",
+// //     content:
+// //       "Hoisting is JavaScript's behavior of moving declarations to the top of their scope during compilation.",
+// //   },
+// //   {
+// //     id: 3,
+// //     title: "What is useMemo?",
+// //     content:
+// //       "useMemo memoizes a computed value and recalculates it only when dependencies change.",
+// //   },
+// // ];
 
-const accordianContainer = document.getElementById("accordian-container");
+// // const accordianContainer = document.getElementById("accordian-container");
 
-accordiandata.map((accordiandata, index) => {
-  const accordianDiv = document.createElement("div");
-  accordianDiv.classList.add("accordianDiv");
-  accordianDiv.innerHTML = `
-    <p class="accordianTitle">${accordiandata.title}</p>
-    <p class="accordianContent">${accordiandata.content}</p>
-    `;
+// // accordiandata.map((accordiandata, index) => {
+// //   const accordianDiv = document.createElement("div");
+// //   accordianDiv.classList.add("accordianDiv");
+// //   accordianDiv.innerHTML = `
+// //     <p class="accordianTitle">${accordiandata.title}</p>
+// //     <p class="accordianContent">${accordiandata.content}</p>
+// //     `;
 
-  accordianContainer.appendChild(accordianDiv);
-  const accordianTitle = accordianDiv.querySelector(".accordianTitle");
-  const accordianContent = accordianDiv.querySelector(".accordianContent");
+// //   accordianContainer.appendChild(accordianDiv);
+// //   const accordianTitle = accordianDiv.querySelector(".accordianTitle");
+// //   const accordianContent = accordianDiv.querySelector(".accordianContent");
 
-  accordianContent.classList.add("hidden");
-  console.log(accordianTitle.textContent);
-  accordianDiv.addEventListener("click", () => {
-    if (accordianContent.classList.contains("hidden"))
-      accordianContent.classList.replace("hidden", "visible");
-    else if (accordianContent.classList.contains("visible"))
-      accordianContent.classList.replace("visible", "hidden");
-  });
-});
+// //   accordianContent.classList.add("hidden");
+// //   //console.log(accordianTitle.textContent);
+// //   accordianDiv.addEventListener("click", () => {
+// //     if (accordianContent.classList.contains("hidden"))
+// //       accordianContent.classList.replace("hidden", "visible");
+// //     else if (accordianContent.classList.contains("visible"))
+// //       accordianContent.classList.replace("visible", "hidden");
+// //   });
+// // });
+
+// var a = 10;
+// // let b = 20;
+// const c = 30;
+
+// function foo() {
+//   a = 40;
+
+//   const c = 60;
+//   console.log("1", a, b, c); //
+// }
+
+// {
+//   //   var a = 70;
+//   a = 70;
+//   b = 80;
+//   const c = 90;
+// }
+// foo();
+// console.log("2", a, b, c); //
+
+// // 1,40 ,80,60
+// // 2,70,20,30
+
+// var a = 10;
+// b = 20;
+// const c = 30;
+
+// function foo() {
+//   console.log("1", a, b, c);
+//   a = 40;
+//   const c = 60;
+// }
+
+// {
+//   a = 70;
+//   b = 80;
+//   const c = 90;
+// }
+
+// foo();
+
+// console.log("2", a, b, c);
+
+// a = 40;
+// b = 80;
+// c = 30
+
+//1, undefined,80
+//2,40,80,30
