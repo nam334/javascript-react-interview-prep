@@ -1,15 +1,12 @@
 .accordianDiv {
-  width: 60%;
+  width: var(--accordian-width);
   margin: 1rem auto;
   padding: 1rem 1.25rem;
-
-  background-color: #fff;
+  background-color: var(--WHITE);
   border-radius: 8px;
-  border: 1px solid #e5e7eb;
-
+  border: 1px solid var(--accordian-border-color);
   cursor: pointer;
   transition: all 0.3s ease;
-
   box-shadow:
     rgba(0, 0, 0, 0.08) 0px 2px 8px,
     rgba(0, 0, 0, 0.04) 0px 1px 3px;
@@ -26,7 +23,7 @@
   margin: 0;
   font-size: 0.7rem;
   font-weight: 300;
-  color: #1f2937;
+  color: var(--GREY);
 }
 .accordianDiv .accordianTitle {
   font-size: 1rem;
@@ -40,4 +37,15 @@
 
 .visible {
   display: block;
+}
+
+.buttonGroup {
+  margin-left: auto;
+  width: 300px;
+}
+.buttonGroup button {
+  padding: 0.8rem;
+  background-color: transparent;
+  border: 1px solid #ccc;
+  cursor: pointer;
 }

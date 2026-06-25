@@ -1,5 +1,7 @@
 :root {
   --BLACK: black;
+  --WHITE: #fff;
+  --GREY: #1f2937;
   --body-height: 90vh;
   --grandparent-width: 500px;
   --parent-width: 300px;
@@ -8,4 +10,6 @@
   --grandparent-height: 200px;
   --parent-height: 150px;
   --child-height: 70px;
+  --accordian-width: 60%;
+  --accordian-border-color: #e5e7eb;
 }
