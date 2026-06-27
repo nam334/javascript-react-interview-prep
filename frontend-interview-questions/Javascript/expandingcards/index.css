@@ -1,0 +1,20 @@
+.expandingcardsdiv {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.expandingcardsdiv img {
+  height: 500px;
+  border-radius: 20%;
+  aspect-ratio: inherit;
+  cursor: pointer;
+}
+.cardsinitialwidth {
+  width: 120px;
+  transition: width 0.5s ease-in-out;
+}
+.cardsexpandedwidth {
+  width: 200px;
+  transition: width 0.5s ease-in-out;
+}

@@ -35,5 +35,6 @@
 
 // outer();
 
-// Here, if in place of let we use var we can see its hoisted as undefined in global memory space, but if its let in place of var how to view
+// Here, if in place of let we use var we can see its hoisted as undefined in global memory space,
+//  but if its let in place of var how to view
 // block where its hoisted?

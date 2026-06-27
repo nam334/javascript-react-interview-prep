@@ -1,22 +1,11 @@
-x = 10;
-
 function outer() {
-  console.log("1", x);
-
-  {
-    console.log("2", y);
-    x = 5;
-    var y = 20;
-    {
-      console.log("3", x);
-
-      console.log("4", y);
-      console.log("5", x);
-    }
+  debugger;
+  if (true) {
+    debugger;
+    let a = 30;
   }
-  console.log("6", y);
+  b = 40;
+  console.log("4", a, b);
 }
 
 outer();
-
-//ref error
