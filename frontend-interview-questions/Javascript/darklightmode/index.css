@@ -4,6 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 98vh;
+  gap: 1rem;
 }
 .light {
   background: #f8f8f8;
@@ -24,9 +25,34 @@
   opacity: 0.8;
 }
 .lightbtn {
-  background: transparent;
+  background: #c7c4c4;
   border: 2px solid #ccc;
 }
 .darkbtn {
   background: #f1ececc7;
+}
+.toggle {
+  width: 85px;
+  height: 40px;
+  border: 1px solid black;
+  background: transparent;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+}
+.left {
+  transform: translateX(0px);
+  background-color: rgba(102, 102, 255, 0.639);
+  transition: transform 0.3s ease-in-out;
+}
+.right {
+  transform: translateX(45px);
+  background-color: rgba(0, 0, 255, 0.639);
+  transition: transform 0.3s ease-in-out;
+}
+.switch {
+  width: 40px;
+  height: 100%;
+
+  border-radius: 10px;
+  cursor: pointer;
 }
