@@ -78,19 +78,72 @@
 // filtered down to just the elements from the given array that pass the test implemented by the
 //  provided function.
 
-const arr = [2, , 6, 8, 10];
+// const arr = [2, , 6, 8, 10];
 
-Array.prototype.myfilter = function (cb) {
-  if (typeof cb !== "function")
-    throw new TypeError("Callback is not a function");
-  let newArr = [];
-  for (let i = 0; i < this.length; i++) {
-    if (i in this) {
-      if (cb(this[i])) newArr.push(this[i]);
-    }
-  }
-  return newArr;
-};
+// Array.prototype.myfilter = function (cb) {
+//   if (typeof cb !== "function")
+//     throw new TypeError("Callback is not a function");
+//   let newArr = [];
+//   for (let i = 0; i < this.length; i++) {
+//     if (i in this) {
+//       if (cb(this[i])) newArr.push(this[i]);
+//     }
+//   }
+//   return newArr;
+// };
 
-const res = arr.myfilter((el) => el > 3);
-console.log(res);
+// const res = arr.myfilter((el) => el > 3);
+// console.log(res);
+
+// 5. every
+
+// The every() method iterates over each array element, returning true if the provided
+// function returns true for all elements. It returns false if the function returns false
+// for any element. This method does not operate on empty elements and leaves the original
+// array unchanged.
+
+// Edge case - callback is not a function
+// const arr = [3, 5, 8, 9, 11];
+
+// Array.prototype.myEvery = function (cb) {
+//   if (typeof cb !== "function")
+//     throw new TypeError("Callback is not a function");
+//   let result = true;
+//   for (let i = 0; i < this.length; i++) {
+//     if (i in this) {
+//       if (!cb(this[i], i, this)) {
+//         result = false;
+//         break;
+//       }
+//     }
+//   }
+//   return result;
+// };
+
+// const newarr = arr.myEvery((el) => el > 100);
+// console.log(newarr);
+
+//6.some - The some() method of Array instances returns true if it finds an element in the array
+//  that satisfies the provided testing function. Otherwise, it returns false.
+
+// Edge cases
+// 1. If callback is not a function
+// 2. If array is a sparse array
+
+// const arr = [, , 5];
+
+// Array.prototype.mysome = function (cb) {
+//   if (typeof cb !== "function")
+//     throw new TypeError("Callback must be a function");
+
+//   for (let i = 0; i < this.length; i++) {
+//     if (i in this) if (cb(this[i])) return true;
+//   }
+//   return false;
+// };
+
+// const newarr = arr.mysome((el, i) => {
+//   console.log("poly:", el);
+//   el > 4;
+// });
+// console.log(newarr);
