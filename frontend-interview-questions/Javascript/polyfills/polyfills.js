@@ -5,17 +5,33 @@
 // Map method returns a new array which contains the results of the function
 // called on each element of the array
 
-const arr = [2, 4, 6, 8, 10];
+const arr = [2, , 6, 8, 10];
 
 //Polyfill of map
 
+// Edge cases
+// 1. if input is not a function
+// 2. if the array is a sparse array (array with empty values), for eg [1,2,,4]
+
 Array.prototype.myMap = function (cb) {
-  console.log("this is", this, "cb is", cb);
+  if (typeof cb !== "function")
+    throw new TypeError("Function parameter is missing");
+  //console.log("this is", this, "cb is", cb);
   const newarr = [];
   for (let i = 0; i < this.length; i++) {
-    newarr.push(cb(this[i], i, this));
+    if (i in this) {
+      newarr[i] = cb(this[i], i, this);
+    }
   }
   return newarr;
 };
 
-console.log(arr.myMap((el) => el + 1));
+console.log(
+  "from mymap",
+  arr.myMap((el) => el + 1),
+);
+
+console.log(
+  "from map",
+  arr.map((el) => el + 1),
+);
