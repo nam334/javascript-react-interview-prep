@@ -39,16 +39,36 @@
 // 2. forEach - The forEach() method of Array instances executes a provided function
 // once for each array element.It does not return anything
 
-const arr = [2, , 6, 8, 10];
+// Edge cases
+// 1. If input passed to myforeach is not a callback function.
+// 2. If the array is a sparse array
+// const arr = [2, , 6, 8, 10];
 
-Array.prototype.myforEach = function (cb) {
-  if (typeof cb !== "function") throw new TypeError("Input is not a function");
-  for (let i = 0; i < this.length; i++) {
-    if (i in this) cb(this[i], i, this);
-  }
-};
+// Array.prototype.myforEach = function (cb) {
+//   if (typeof cb !== "function") throw new TypeError("Input is not a function");
+//   for (let i = 0; i < this.length; i++) {
+//     if (i in this) cb(this[i], i, this);
+//   }
+// };
 
-let sum = 0;
-console.log("sum before using myforeach", sum);
-arr.myforEach((el) => (sum = sum + el));
-console.log("sum after using myforeach", sum);
+// let sum = 0;
+// console.log("sum before using myforeach", sum);
+// arr.myforEach((el) => (sum = sum + el));
+// console.log("sum after using myforeach", sum);
+
+// 3. find
+// The find() method of Array instances returns the first element in the provided array that satisfies
+// the provided testing function. If no values satisfy the testing function, undefined is returned.
+
+// const arr = [2, , 6, 8, 10];
+
+// Array.prototype.myfind = function (cb) {
+//   if (typeof cb !== "function") return new TypeError("Input is not a function");
+//   for (let i = 0; i < this.length; i++) {
+//     if (cb(this[i])) return this[i];
+//   }
+//   return undefined;
+// };
+
+// const newarr = arr.myfind((el) => el > 7);
+// console.log(newarr);
