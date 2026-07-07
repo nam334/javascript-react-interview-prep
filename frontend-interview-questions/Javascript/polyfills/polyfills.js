@@ -63,12 +63,34 @@
 // const arr = [2, , 6, 8, 10];
 
 // Array.prototype.myfind = function (cb) {
-//   if (typeof cb !== "function") return new TypeError("Input is not a function");
+//   if (typeof cb !== "function") throw new TypeError("Input is not a function");
 //   for (let i = 0; i < this.length; i++) {
-//     if (cb(this[i])) return this[i];
+//     if (cb(this[i], i, this)) return this[i];
 //   }
 //   return undefined;
 // };
 
 // const newarr = arr.myfind((el) => el > 7);
 // console.log(newarr);
+
+// 4. filter
+// The filter() method of Array instances creates a shallow copy of a portion of a given array,
+// filtered down to just the elements from the given array that pass the test implemented by the
+//  provided function.
+
+const arr = [2, , 6, 8, 10];
+
+Array.prototype.myfilter = function (cb) {
+  if (typeof cb !== "function")
+    throw new TypeError("Callback is not a function");
+  let newArr = [];
+  for (let i = 0; i < this.length; i++) {
+    if (i in this) {
+      if (cb(this[i])) newArr.push(this[i]);
+    }
+  }
+  return newArr;
+};
+
+const res = arr.myfilter((el) => el > 3);
+console.log(res);
