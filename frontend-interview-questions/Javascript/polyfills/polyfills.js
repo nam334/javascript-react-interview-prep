@@ -147,3 +147,36 @@
 //   el > 4;
 // });
 // console.log(newarr);
+
+// 7. reduce
+// reduce() is a JavaScript array method that goes through each element of an array and combines
+// them into a single final value.
+
+// Edge case
+// 1. If no initial value is provided, it uses the first value as the accumulator
+
+const arr = [1, 2, 3, 4];
+let sum = 1;
+
+Array.prototype.myreduce = function (cb, acc) {
+  console.log(arguments);
+  if (typeof cb !== "function")
+    throw new TypeError("Callback is not a function");
+  if (this.length === 0 && arguments.length < 2)
+    throw new TypeError("Reduce of empty array with no initial value");
+  let result, startindex;
+  if (arguments.length >= 2) {
+    result = acc;
+    startindex = 0;
+  } else {
+    result = this[0];
+    startindex = 1;
+  }
+  for (let i = startindex; i < this.length; i++) {
+    if (i in this) result = cb(result, this[i]);
+  }
+  return result;
+};
+
+let result = arr.myreduce((el, sum) => el + sum);
+console.log(result);
