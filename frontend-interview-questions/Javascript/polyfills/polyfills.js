@@ -155,28 +155,63 @@
 // Edge case
 // 1. If no initial value is provided, it uses the first value as the accumulator
 
-const arr = [1, 2, 3, 4];
-let sum = 1;
+// const arr = [1, 2, 3, 4];
+// let sum = 1;
 
-Array.prototype.myreduce = function (cb, acc) {
-  console.log(arguments);
-  if (typeof cb !== "function")
-    throw new TypeError("Callback is not a function");
-  if (this.length === 0 && arguments.length < 2)
-    throw new TypeError("Reduce of empty array with no initial value");
-  let result, startindex;
-  if (arguments.length >= 2) {
-    result = acc;
-    startindex = 0;
-  } else {
-    result = this[0];
-    startindex = 1;
-  }
-  for (let i = startindex; i < this.length; i++) {
-    if (i in this) result = cb(result, this[i]);
-  }
-  return result;
-};
+// Array.prototype.myreduce = function (cb, acc) {
+//   console.log(arguments);
+//   if (typeof cb !== "function")
+//     throw new TypeError("Callback is not a function");
+//   if (this.length === 0 && arguments.length < 2)
+//     throw new TypeError("Reduce of empty array with no initial value");
+//   let result, startindex;
+//   if (arguments.length >= 2) {
+//     result = acc;
+//     startindex = 0;
+//   } else {
+//     result = this[0];
+//     startindex = 1;
+//   }
+//   for (let i = startindex; i < this.length; i++) {
+//     if (i in this) result = cb(result, this[i]);
+//   }
+//   return result;
+// };
 
-let result = arr.myreduce((el, sum) => el + sum);
-console.log(result);
+// let result = arr.myreduce((el, sum) => el + sum);
+// console.log(result);
+
+// 8. Push - The push() method of Array instances adds the specified elements to the end of an
+// array and returns the new length of the array.
+
+// const arr = [4, 6, 4];
+
+// Array.prototype.mypush = function (...el) {
+//   const arrLength = this.length + el.length;
+//   let count = 0;
+//   for (let i = this.length; i < arrLength; i++) {
+//     this[i] = el[count];
+//     count++;
+//   }
+//   return this.length;
+// };
+// const newarr = arr.mypush(0);
+// console.log(arr, newarr);
+
+//9. The pop() method of Array instances removes the last element from an array and
+//  returns that element. This method changes the length of the array.
+
+// const arr = [];
+
+// Array.prototype.mypop = function () {
+//   if (!this?.length) return undefined;
+//   let popEl = this[this.length - 1];
+//   this.length--;
+//   return popEl;
+// };
+// const newArr = arr.pop();
+// console.log(newArr, arr);
+
+// 10. shift
+// 11. unshift
+// 12. flat
