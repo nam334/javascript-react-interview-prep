@@ -215,3 +215,22 @@
 // 10. shift
 // 11. unshift
 // 12. flat
+// The flat() method of Array instances creates a new array with all sub-array elements
+// concatenated into it recursively up to the specified depth.
+
+const arr1 = [0, 1, 2, [3, [4, 5]]];
+
+Array.prototype.myflat = function (depth) {
+  let result = [];
+  for (let i = 0; i < this.length; i++) {
+    let curr = this[i];
+    if (!Array.isArray(curr)) {
+      result.push(curr);
+    } else {
+      result.push(...curr.myflat(depth - 1));
+    }
+  }
+  console.log("result is", ...result);
+  return result;
+};
+console.log(arr1.myflat(2));
