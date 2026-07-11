@@ -213,6 +213,24 @@
 // console.log(newArr, arr);
 
 // 10. shift
+// The shift() method of Array instances removes the first element from an array and returns that
+// removed element. This method changes the length of the array.
+
+const arr = [2, 4, 6];
+
+Array.prototype.myshift = function () {
+  if (this.length === 0) {
+    return undefined;
+  }
+  let el = this[0];
+  for (let i = 0; i < this.length - 1; i++) {
+    this[i] = this[i + 1];
+  }
+  this.length--;
+  return el;
+};
+
+console.log(arr.myshift(), arr);
 // 11. unshift
 
 // 12. flat
@@ -222,21 +240,21 @@
 // 1. If array is empty, it should return the original array.
 // 2. If depth is not defined, by default depth in native flat is 1
 
-const arr1 = [0, 1, 2, [3, [4, 5]]];
-const arr = [2, , 3];
+// const arr1 = [0, 1, 2, [3, [4, 5]]];
+// const arr = [2, , 3];
 
-Array.prototype.myflat = function (depth = 1) {
-  let result = [];
+// Array.prototype.myflat = function (depth = 1) {
+//   let result = [];
 
-  for (let i = 0; i < this.length; i++) {
-    if (i in this) {
-      if (!Array.isArray(this[i])) result.push(this[i]);
-      else {
-        if (depth > 0) result.push(...this[i].myflat(depth - 1));
-        else result.push(this[i]);
-      }
-    }
-  }
-  return result;
-};
-console.log(arr.flat(Infinity));
+//   for (let i = 0; i < this.length; i++) {
+//     if (i in this) {
+//       if (!Array.isArray(this[i])) result.push(this[i]);
+//       else {
+//         if (depth > 0) result.push(...this[i].myflat(depth - 1));
+//         else result.push(this[i]);
+//       }
+//     }
+//   }
+//   return result;
+// };
+// console.log(arr.flat(Infinity));
