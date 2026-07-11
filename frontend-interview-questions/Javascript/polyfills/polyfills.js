@@ -251,7 +251,7 @@ Array.prototype.myUnshift = function (...args) {
   }
   return this.length;
 };
-const arr = [2, 3, 4];
+const arr = [];
 
 console.log(arr.length);
 
