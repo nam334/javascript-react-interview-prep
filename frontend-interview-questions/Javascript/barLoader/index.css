@@ -1,0 +1,9 @@
+#loader {
+  height: 2px;
+  width: 1vw;
+  background-color: orange;
+  transition: width 0.3s ease-in;
+  position: absolute;
+  top: 0%;
+  overflow: hidden;
+}
