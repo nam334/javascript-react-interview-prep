@@ -215,24 +215,49 @@
 // 10. shift
 // The shift() method of Array instances removes the first element from an array and returns that
 // removed element. This method changes the length of the array.
+// Edge cases
+// If we pass an empty array to shift, the native shift returns undefined as there is no element
 
-const arr = [2, 4, 6];
+// const arr = [2, 4, 6];
 
-Array.prototype.myshift = function () {
-  if (this.length === 0) {
-    return undefined;
-  }
-  let el = this[0];
-  for (let i = 0; i < this.length - 1; i++) {
-    this[i] = this[i + 1];
-  }
-  this.length--;
-  return el;
-};
+// Array.prototype.myshift = function () {
+//   if (this.length === 0) {
+//     return undefined;
+//   }
+//   let el = this[0];
+//   for (let i = 0; i < this.length - 1; i++) {
+//     this[i] = this[i + 1];
+//   }
+//   this.length--;
+//   return el;
+// };
 
-console.log(arr.myshift(), arr);
+// console.log(arr.myshift(), arr);
+
 // 11. unshift
+// The unshift() method of Array instances adds the specified elements to the beginning of an array
+// and returns the new length of the array.
 
+Array.prototype.myUnshift = function (...args) {
+  let arrlength = this.length - 1; // 3
+  let argslength = args.length; //2
+  let newlength = this.length + args.length; //5
+  for (let i = newlength - 1; i >= argslength; i--) {
+    this[i] = this[i - arrlength];
+  }
+  // console.log("this is", this);
+  for (let i = 0; i < argslength; i++) {
+    this[i] = args[i];
+  }
+  return this.length;
+};
+const arr = [2, 3, 4];
+
+console.log(arr.length);
+
+arr.myUnshift(8, 9);
+
+console.log(arr.length);
 // 12. flat
 // The flat() method of Array instances creates a new array with all sub-array elements
 // concatenated into it recursively up to the specified depth.
