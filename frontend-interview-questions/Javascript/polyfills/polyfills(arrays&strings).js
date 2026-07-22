@@ -59,29 +59,51 @@
 // 3. indexOf - The indexOf() method of Array instances returns the first index at which a given element
 // can be found in the array, or -1 if it is not present.
 
-const beasts = ["ant", "bison", "camel", "duck", "bison"];
-Array.prototype.myIndexOf = function (...args) {
-  let startIndex;
+// const beasts = ["ant", "bison", "camel", "duck", "bison"];
+// Array.prototype.myIndexOf = function (...args) {
+//   let startIndex;
 
-  if (args[1] < 0) {
-    startIndex = this.length + args[1];
-    if (startIndex < 0) startIndex = 0;
-  } else {
-    startIndex = args[1] || 0;
-  }
+//   if (args[1] < 0) {
+//     startIndex = this.length + args[1];
+//     if (startIndex < 0) startIndex = 0;
+//   } else {
+//     startIndex = args[1] || 0;
+//   }
 
-  for (let i = startIndex; i < this.length; i++) {
-    if (this[i] === args[0]) return i;
-  }
-  return -1;
-};
+//   for (let i = startIndex; i < this.length; i++) {
+//     if (this[i] === args[0]) return i;
+//   }
+//   return -1;
+// };
 
-console.log(beasts.myIndexOf("bison"));
-// Expected output: 1
+// console.log(beasts.myIndexOf("bison"));
+// // Expected output: 1
 
-// Start from index 2
-console.log(beasts.myIndexOf("bison", 2));
-// Expected output: 4
+// // Start from index 2
+// console.log(beasts.myIndexOf("bison", 2));
+// // Expected output: 4
 
-console.log(beasts.myIndexOf("giraffe"));
-// Expected output: -1
+// console.log(beasts.myIndexOf("giraffe"));
+// // Expected output: -1
+
+// 4. The findIndex() method of Array instances returns the index of the first element in an array
+// that satisfies the provided testing function. If no elements satisfy the testing function,
+//  -1 is returned.
+
+// const arr = [2, 4, 6, 8];
+
+// Array.prototype.myfindIndex = function (cb) {
+//   if (typeof cb !== "function")
+//     throw new TypeError("Callback is not a function");
+//   for (let i = 0; i < this.length; i++) {
+//     if (i in this) {
+//       if (cb(this[i], i, this)) {
+//         return i;
+//       }
+//     }
+//   }
+//   return -1;
+// };
+// console.log(arr.myfindIndex((el) => el > 3));
+
+//Strings
