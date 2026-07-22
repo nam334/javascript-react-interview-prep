@@ -10,11 +10,14 @@ img {
   font-size: 2rem;
   font-weight: 500;
   color: white;
+  transform: scale(1.5);
 }
-.addblur {
+/* .addblur {
   filter: blur(20px);
 }
 
 .removeblur {
   filter: blur(0px);
-}
+} */
+
+/* transform, animation key frame, transition */

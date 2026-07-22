@@ -13,10 +13,13 @@
 // 1. if input is not a function
 // 2. if the array is a sparse array (array with empty values), for eg [1,2,,4]
 
+//null, undefined, special ch - missing
+
 // Array.prototype.myMap = function (cb) {
 //   if (typeof cb !== "function")
 //     throw new TypeError("Function parameter is missing");
 //   //console.log("this is", this, "cb is", cb);
+
 //   const newarr = [];
 //   for (let i = 0; i < this.length; i++) {
 //     if (i in this) {
@@ -178,21 +181,24 @@
 //   return result;
 // };
 
-// let result = arr.myreduce((el, sum) => el + sum);
+// let result = arr.myreduce((el, sum) => el + sum, sum);
 // console.log(result);
 
 // 8. Push - The push() method of Array instances adds the specified elements to the end of an
 // array and returns the new length of the array.
 
-// const arr = [4, 6, 4];
+//const arr = [4, 6, 4];
 
-// Array.prototype.mypush = function (...el) {
+// Array.prototype.mypush = function (el) {
 //   const arrLength = this.length + el.length;
 //   let count = 0;
 //   for (let i = this.length; i < arrLength; i++) {
 //     this[i] = el[count];
 //     count++;
 //   }
+//   return this.length;
+//   chk---
+//   this[this.length + 1] = el;
 //   return this.length;
 // };
 // const newarr = arr.mypush(0);
@@ -238,26 +244,28 @@
 // The unshift() method of Array instances adds the specified elements to the beginning of an array
 // and returns the new length of the array.
 
-Array.prototype.myUnshift = function (...args) {
-  let arrlength = this.length - 1; // 3
-  let argslength = args.length; //2
-  let newlength = this.length + args.length; //5
-  for (let i = newlength - 1; i >= argslength; i--) {
-    this[i] = this[i - arrlength];
-  }
-  // console.log("this is", this);
-  for (let i = 0; i < argslength; i++) {
-    this[i] = args[i];
-  }
-  return this.length;
-};
-const arr = [];
+//single loop - unshift
 
-console.log(arr.length);
+// Array.prototype.myUnshift = function (...args) {
+//   let arrlength = this.length - 1; // 3
+//   let argslength = args.length; //2
+//   let newlength = this.length + args.length; //5
+//   for (let i = newlength - 1; i >= argslength; i--) {
+//     this[i] = this[i - arrlength];
+//   }
+//   // console.log("this is", this);
+//   for (let i = 0; i < argslength; i++) {
+//     this[i] = args[i];
+//   }
+//   return this.length;
+// };
+// const arr = [];
 
-arr.myUnshift(8, 9);
+// console.log(arr.length);
 
-console.log(arr.length);
+// arr.myUnshift(8, 9);
+
+// console.log(arr.length);
 // 12. flat
 // The flat() method of Array instances creates a new array with all sub-array elements
 // concatenated into it recursively up to the specified depth.
@@ -265,21 +273,27 @@ console.log(arr.length);
 // 1. If array is empty, it should return the original array.
 // 2. If depth is not defined, by default depth in native flat is 1
 
-// const arr1 = [0, 1, 2, [3, [4, 5]]];
-// const arr = [2, , 3];
+const arr1 = [0, 1, 2, [3, [4, 5]]];
+const arr = [2, , 3];
 
-// Array.prototype.myflat = function (depth = 1) {
-//   let result = [];
+Array.prototype.myflat = function (depth = 1) {
+  let result = [];
 
-//   for (let i = 0; i < this.length; i++) {
-//     if (i in this) {
-//       if (!Array.isArray(this[i])) result.push(this[i]);
-//       else {
-//         if (depth > 0) result.push(...this[i].myflat(depth - 1));
-//         else result.push(this[i]);
-//       }
-//     }
-//   }
-//   return result;
-// };
-// console.log(arr.flat(Infinity));
+  for (let i = 0; i < this.length; i++) {
+    if (i in this) {
+      if (!Array.isArray(this[i])) result.push(this[i]);
+      else {
+        if (depth > 0) result.push(...this[i].myflat(depth - 1));
+        else result.push(this[i]);
+      }
+    }
+  }
+  return result;
+};
+console.log(arr1.myflat(1));
+
+const obj = {
+  name: "namrata",
+};
+
+console.log(obj.__proto__);
