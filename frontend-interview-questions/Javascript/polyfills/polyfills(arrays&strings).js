@@ -107,3 +107,35 @@
 // console.log(arr.myfindIndex((el) => el > 3));
 
 //Strings
+
+// 5. StartsWith - The startsWith() method of String values determines whether this string begins
+// with the characters of a specified string, returning true or false as appropriate.
+
+String.prototype.mystartsWith = function (...args) {
+  if (args[0] === "") return true;
+  let len = 1,
+    count = 0,
+    startIndex;
+  startIndex = args[1] || 0;
+
+  if (this[startIndex] === args[0][0]) {
+    let indexVal = startIndex + 1;
+    while (len < args[0].length) {
+      if (this[indexVal] === args[0][len]) {
+        count++;
+      }
+      len++;
+      indexVal++;
+    }
+    if (count + 1 === args[0].length) return true;
+  }
+
+  return false;
+};
+const str = "Saturday night plans";
+
+console.log(str.mystartsWith(""));
+// // Expected output: true
+console.log(str.mystartsWith("Sat"));
+console.log(str.mystartsWith("Sat", 3));
+// // Expected output: false
