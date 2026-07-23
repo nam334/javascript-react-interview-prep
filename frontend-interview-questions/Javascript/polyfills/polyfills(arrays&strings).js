@@ -106,36 +106,99 @@
 // };
 // console.log(arr.myfindIndex((el) => el > 3));
 
-//Strings
+//--------------------------------------Strings------------------------------------------------
 
 // 5. StartsWith - The startsWith() method of String values determines whether this string begins
 // with the characters of a specified string, returning true or false as appropriate.
 
-String.prototype.mystartsWith = function (...args) {
+// String.prototype.mystartsWith = function (...args) {
+//   if (args[0] === "") return true;
+//   let len = 1,
+//     count = 0,
+//     startIndex;
+//   startIndex = args[1] || 0;
+
+//   if (this[startIndex] === args[0][0]) {
+//     let indexVal = startIndex + 1;
+//     while (len < args[0].length) {
+//       if (this[indexVal] === args[0][len]) {
+//         count++;
+//       }
+//       len++;
+//       indexVal++;
+//     }
+//     if (count + 1 === args[0].length) return true;
+//   }
+
+//   return false;
+// };
+// const str = "Saturday night plans";
+
+// console.log(str.mystartsWith(""));
+// // // Expected output: true
+// console.log(str.mystartsWith("Sat"));
+// console.log(str.mystartsWith("Sat", 3));
+// // // Expected output: false
+
+// 6. endsWith() - The endsWith() method of String values determines whether a string ends with
+// the characters of this string, returning true or false as appropriate.
+
+// String.prototype.myEndsWith = function (...args) {
+//   let argsLength = args[0].length;
+//   //   ?? - Nullish Coalescing Operator
+//   //   If the value on the left is missing (null or undefined), use the value on the right.
+//   let endIndex = args[1] ?? this.length;
+//   let count = 0;
+
+//   //search from last
+
+//   if (this[endIndex - 1] === args[0][argsLength - 1]) {
+//     while (argsLength > 0) {
+//       if (this[endIndex - 1] === args[0][argsLength - 1]) count++;
+//       endIndex--;
+//       argsLength--;
+//     }
+//   }
+//   if (count === args[0].length) return true;
+
+//   return false;
+// };
+// const str = "To be, or not to be, that is the question.";
+
+// console.log(str.myEndsWith("question.")); // true
+// console.log(str.myEndsWith("to be")); // false
+// console.log(str.myEndsWith("to be", 19)); // true
+
+// 7. includes - The includes() method of String values performs a case-sensitive search to
+// determine whether a given string may be found within this string, returning true or false as
+//  appropriate.
+const str = "To be, or not to be, that is the question.";
+
+String.prototype.myincludes = function (...args) {
   if (args[0] === "") return true;
-  let len = 1,
-    count = 0,
-    startIndex;
-  startIndex = args[1] || 0;
-
-  if (this[startIndex] === args[0][0]) {
-    let indexVal = startIndex + 1;
-    while (len < args[0].length) {
-      if (this[indexVal] === args[0][len]) {
-        count++;
+  let startIndex = args[1] ?? 0;
+  let argsLength = args[0].length,
+    count = 0;
+  for (let i = startIndex; i < this.length; i++) {
+    count = 0;
+    if (this[i] === args[0][0]) {
+      let len = 0,
+        index = i;
+      while (len < argsLength) {
+        if (this[index] === args[0][len]) {
+          count++;
+        }
+        index++;
+        len++;
       }
-      len++;
-      indexVal++;
+      if (count === args[0].length) return true;
     }
-    if (count + 1 === args[0].length) return true;
   }
-
   return false;
 };
-const str = "Saturday night plans";
-
-console.log(str.mystartsWith(""));
-// // Expected output: true
-console.log(str.mystartsWith("Sat"));
-console.log(str.mystartsWith("Sat", 3));
-// // Expected output: false
+console.log(str.myincludes("To be")); // true
+console.log(str.myincludes("question")); // true
+console.log(str.myincludes("nonexistent")); // false
+console.log(str.myincludes("To be", 1)); // false
+console.log(str.myincludes("TO BE")); // false
+console.log(str.myincludes("")); // true
