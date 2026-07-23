@@ -172,33 +172,74 @@
 // 7. includes - The includes() method of String values performs a case-sensitive search to
 // determine whether a given string may be found within this string, returning true or false as
 //  appropriate.
-const str = "To be, or not to be, that is the question.";
+// const str = "To be, or not to be, that is the question.";
 
-String.prototype.myincludes = function (...args) {
-  if (args[0] === "") return true;
-  let startIndex = args[1] ?? 0;
-  let argsLength = args[0].length,
-    count = 0;
-  for (let i = startIndex; i < this.length; i++) {
-    count = 0;
-    if (this[i] === args[0][0]) {
-      let len = 0,
-        index = i;
-      while (len < argsLength) {
-        if (this[index] === args[0][len]) {
-          count++;
-        }
-        index++;
-        len++;
-      }
-      if (count === args[0].length) return true;
-    }
+// String.prototype.myincludes = function (...args) {
+//   if (args[0] === "") return true;
+//   let startIndex = args[1] ?? 0;
+//   let argsLength = args[0].length,
+//     count = 0;
+//   for (let i = startIndex; i < this.length; i++) {
+//     count = 0;
+//     if (this[i] === args[0][0]) {
+//       let len = 0,
+//         index = i;
+//       while (len < argsLength) {
+//         if (this[index] === args[0][len]) {
+//           count++;
+//         }
+//         index++;
+//         len++;
+//       }
+//       if (count === args[0].length) return true;
+//     }
+//   }
+//   return false;
+// };
+// console.log(str.myincludes("To be")); // true
+// console.log(str.myincludes("question")); // true
+// console.log(str.myincludes("nonexistent")); // false
+// console.log(str.myincludes("To be", 1)); // false
+// console.log(str.myincludes("TO BE")); // false
+// console.log(str.myincludes("")); // true
+
+// 8. split - The split() method of String values takes a pattern and divides this string into an
+//  ordered list of substrings by searching for the pattern, puts these substrings into an array,
+//   and returns the array.
+
+// const str = "The quick brown fox jumps over the lazy dog.";
+
+// const words = str.split(" ");
+// console.log(words[3]);
+// // Expected output: "fox"
+
+// const chars = str.split("");
+// console.log(chars[8]);
+// // Expected output: "k"
+
+// const strCopy = str.split();
+// console.log(strCopy);
+
+//9. repeat
+
+String.prototype.myRepeat = function (value) {
+  if (value === 0 || Number.isNaN(value)) return "";
+  if (value < 0 || value === Infinity)
+    throw new RangeError("Invalid string length");
+  let result = "";
+  value = Math.floor(value);
+  for (let i = 1; i <= value; i++) {
+    result += this;
   }
-  return false;
+  return result;
 };
-console.log(str.myincludes("To be")); // true
-console.log(str.myincludes("question")); // true
-console.log(str.myincludes("nonexistent")); // false
-console.log(str.myincludes("To be", 1)); // false
-console.log(str.myincludes("TO BE")); // false
-console.log(str.myincludes("")); // true
+let str = "Hello";
+
+console.log(str.myRepeat(3)); // "HelloHelloHello"
+console.log(str.myRepeat(1)); // "Hello"
+console.log(str.myRepeat(0)); // ""
+console.log(str.myRepeat(2.5)); // "HelloHello"  → 2.5 is converted to 2
+console.log(str.myRepeat(-1)); // RangeError
+console.log(str.myRepeat(Infinity)); // RangeError
+console.log(str.myRepeat(NaN)); // ""
+console.log(str.myRepeat()); // ""  → undefined becomes 0
