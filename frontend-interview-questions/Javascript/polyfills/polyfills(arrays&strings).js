@@ -207,11 +207,12 @@
 //  ordered list of substrings by searching for the pattern, puts these substrings into an array,
 //   and returns the array.
 
-// const str = "The quick brown fox jumps over the lazy dog.";
+String.prototype.mysplit = function () {};
+const str = "The quick brown fox jumps over the lazy dog.";
 
-// const words = str.split(" ");
-// console.log(words[3]);
-// // Expected output: "fox"
+const words = str.split(" ");
+console.log(words[3]);
+// Expected output: "fox"
 
 // const chars = str.split("");
 // console.log(chars[8]);
@@ -222,24 +223,24 @@
 
 //9. repeat
 
-String.prototype.myRepeat = function (value) {
-  if (value === 0 || Number.isNaN(value)) return "";
-  if (value < 0 || value === Infinity)
-    throw new RangeError("Invalid string length");
-  let result = "";
-  value = Math.floor(value);
-  for (let i = 1; i <= value; i++) {
-    result += this;
-  }
-  return result;
-};
-let str = "Hello";
+// String.prototype.myRepeat = function (value) {
+//   if (value === 0 || Number.isNaN(value)) return "";
+//   if (value < 0 || value === Infinity)
+//     throw new RangeError("Invalid string length");
+//   let result = "";
+//   value = Math.floor(value);
+//   for (let i = 1; i <= value; i++) {
+//     result += this;
+//   }
+//   return result;
+// };
+// let str = "Hello";
 
-console.log(str.myRepeat(3)); // "HelloHelloHello"
-console.log(str.myRepeat(1)); // "Hello"
-console.log(str.myRepeat(0)); // ""
-console.log(str.myRepeat(2.5)); // "HelloHello"  → 2.5 is converted to 2
-console.log(str.myRepeat(-1)); // RangeError
-console.log(str.myRepeat(Infinity)); // RangeError
-console.log(str.myRepeat(NaN)); // ""
-console.log(str.myRepeat()); // ""  → undefined becomes 0
+// console.log(str.myRepeat(3)); // "HelloHelloHello"
+// console.log(str.myRepeat(1)); // "Hello"
+// console.log(str.myRepeat(0)); // ""
+// console.log(str.myRepeat(2.5)); // "HelloHello"  → 2.5 is converted to 2
+// console.log(str.myRepeat(-1)); // RangeError
+// console.log(str.myRepeat(Infinity)); // RangeError
+// console.log(str.myRepeat(NaN)); // ""
+// console.log(str.myRepeat()); // ""  → undefined becomes 0
