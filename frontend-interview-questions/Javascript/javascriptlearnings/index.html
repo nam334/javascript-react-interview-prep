@@ -4,9 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        div{
+            min-height: 100px;
+            min-width: 200px;
+            padding: 30px;
+            border: 1px solid black;
+        }
+    </style>
 </head>
 <body>
-    
+    <div id="parentDiv">
+        <div id="grandParent">
+            <div id="parent">
+                <div id="child"></div>
+            </div>
+        </div>
+    </div>
+   <button>click</button>
 </body>
-<script src="./polyfillforcallApplyBind.js"></script>
+<script src="./eventDelegation.js"></script>
 </html>
+
+<!-- JavaScript
+Create 6-10 polyfills for Array/String
+'this' keyword [global, expression,statement, declartion function, arrow function, obj methods, 
+addEvent/removeEvent]
+call, apply and bind
+Polyfill for Call, Apply and Bind
+Event Traversing: Event Bubbling, Capturing and Delegation
+
+Components [HTML + CSS + JS]
+DoubleClickRippleEffect
+ButtonRippleEffect -->

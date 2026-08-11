@@ -1,10 +1,13 @@
-//1.concat
+//1.Concat - The concat() method of Array instances is used to merge two or more arrays.
+// This method does not change the existing arrays, but instead returns a new array.
+
 // const arr1 = [2, 4, 6];
 // const arr2 = [3, 5, 7];
 
 // Array.prototype.myconcat = function (...args) {
 //   let argsLength = 0;
 //   for (let i = 0; i < args.length; i++) {
+//   check if args passed is an array
 //     if (Array.isArray(args[i])) argsLength += args[i].length;
 //     else argsLength++;
 //   }
@@ -16,6 +19,7 @@
 //   let p = 0;
 //   for (let i = this.length; i < totalLength; i++) {
 //     if (Array.isArray(args[p])) {
+//      if args is an array we loop through the array and copy all its elements
 //       for (let j = 0; j < args[p].length; j++) {
 //         result[i] = args[p][j];
 //         i++;
@@ -38,13 +42,16 @@
 // const arr = [2, 6, NaN, testarr, 8];
 // Array.prototype.myIncludes = function (...args) {
 //   let p = null;
+//handling negative index
 //   if (args[1] < 0) {
 //     p = this.length + args[1];
 //     if (p < 0) p = 0;
 //   } else {
+//else we need to use the second argument as starting index , 0 if its not provided
 //     p = args[1] || 0;
 //   }
 //   for (let i = p; i < this.length; i++) {
+//    check for NaN because normal comparison would fail because NaN === NaN will be false
 //     if (Number.isNaN(this[i]) && Number.isNaN(args[0])) {
 //       return true;
 //     }
@@ -118,7 +125,9 @@
 //     startIndex;
 //   startIndex = args[1] || 0;
 
+// we check the first character
 //   if (this[startIndex] === args[0][0]) {
+// now we will chk from 2nd character since 1st character is already matched
 //     let indexVal = startIndex + 1;
 //     while (len < args[0].length) {
 //       if (this[indexVal] === args[0][len]) {
