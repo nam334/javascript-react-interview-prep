@@ -7,14 +7,14 @@
 .item {
   background-color: black;
   border-radius: 10px;
-  height: 200px;
-  width: 400px;
+  height: 300px;
+  width: 600px;
   position: relative;
 }
 
 .circle {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   background-color: white;
   position: absolute;
