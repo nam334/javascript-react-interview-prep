@@ -98,6 +98,7 @@ function multiply(...arguments) {
     el = arguments;
   } else {
     result = arguments[arguments.length - 2];
+    //below slice removes last 2 items
     el = arguments.slice(0, -2);
   }
   console.log(el);
@@ -107,6 +108,7 @@ function multiply(...arguments) {
   return function (...args) {
     if (args.length >= 1) {
       //for functions after 1st call (starting from 2nd call)
+      //after 1st call, [4,6,true] is passed
       let arg = [...args, result, true];
       return multiply(...arg);
     } else return result;

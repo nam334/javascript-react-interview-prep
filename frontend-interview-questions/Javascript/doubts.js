@@ -38,3 +38,17 @@
 // Here, if in place of let we use var we can see its hoisted as undefined in global memory space,
 //  but if its let in place of var how to view
 // block where its hoisted?
+var a = 10;
+
+function test() {
+  console.log("1:", a);
+
+  if (false) {
+    var a = 20;
+  }
+
+  console.log("2:", a);
+}
+
+test();
+console.log("3:", a);

@@ -9,7 +9,7 @@
 //   for (var i = 1; i <= 5; i++) {
 //     function inner(x) {
 //       setTimeout(function () {
-//         console.log(x);
+//         console.log(i);
 //       }, x * 1000);
 //     }
 //     inner(i);
@@ -17,7 +17,7 @@
 // }
 
 // a();
-// function a() {
+// // function a() {
 //   for (var i = 1; i <= 5; i++) {
 //     setTimeout(
 //       function (x) {
@@ -63,23 +63,46 @@
 
 // console.log(count); - this will give reference error
 
-function outer() {
-  let x = 10;
+// function outer() {
+//   let x = 10;
 
-  const a = () => {
-    x += 5;
-    return x;
-  };
+//   const a = () => {
+//     x += 5;
+//     return x;
+//   };
 
-  const b = () => {
-    return x;
-  };
+//   const b = () => {
+//     return x;
+//   };
 
-  return { a, b };
+//   return { a, b };
+// }
+
+// const obj = outer();
+
+// console.log(obj.b());
+// console.log(obj.a());
+// console.log(obj.b());
+
+// var x = 1;
+// a();
+// b();
+// console.log(x);
+// function a() {
+//   var x = 10;
+//   console.log(x);
+// }
+
+// function b() {
+//   var x = 100;
+//   console.log(x);
+// }
+
+function a() {
+  var b = 10;
+  c();
+  function c() {}
 }
 
-const obj = outer();
-
-console.log(obj.b());
-console.log(obj.a());
-console.log(obj.b());
+a();
+console.log(b);

@@ -50,17 +50,17 @@
 // memoizefibonacci(5);
 
 // 5 - 0 1 1 2 3
-const person = {
-  name: "Namrata",
+// const person = {
+//   name: "Namrata",
 
-  greet() {
-    const arrow = () => this.name;
-    return arrow();
-  },
-};
+//   greet() {
+//     const arrow = () => this.name;
+//     return arrow();
+//   },
+// };
 
-const result = person.greet.call({
-  name: "Aman",
-});
+// const result = person.greet.call({
+//   name: "Nam",
+// });
 
-console.log(result);
+// console.log(result);
