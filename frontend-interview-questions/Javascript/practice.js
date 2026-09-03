@@ -1,23 +1,44 @@
 const obj = {
-  name: "namrata",
+  name: "Namrata",
 };
 
-function printName(name) {
-  console.log(this);
-  console.log(`My name is ${this.name}`);
+function printName(place, country) {
+  console.log(`My name is ${this.name}. I'm from ${place}, ${country}.`);
 }
 
 const obj2 = {
   name: "Priya",
 };
 
-Function.prototype.myCall = function (obj) {
-  console.log(this, obj);
-  let mythis = this;
+//write the apply polyfill
 
-  obj.myfun = mythis;
-  obj.myfun();
-  delete obj.myfun;
+// Function.prototype.myApply = function () {
+//   const arr = [...arguments];
+//   const obj = arr.shift(); //obj
+//   const functionArgs = arr[0];
+//   obj.myfun = this;
+//   const result = obj.myfun(...functionArgs);
+//   delete obj.myfun;
+//   return result;
+// };
+
+// printName.myApply(obj2, ["Dibrugarh", "India"]);
+
+//bindpolyfill
+
+Function.prototype.myBind = function () {
+  let arr = [...arguments];
+
+  let obj = arr.shift();
+  const functionArgs = arr;
+
+  obj.myfun = this;
+
+  return function (...args) {
+    const result = obj.myfun(...functionArgs, ...args);
+
+    return result;
+  };
 };
-
-printName.myCall(obj2);
+const withbind = printName.myBind(obj, "Dib", "Assam");
+withbind();
