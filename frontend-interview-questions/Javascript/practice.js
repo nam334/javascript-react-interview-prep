@@ -26,19 +26,133 @@ const obj2 = {
 
 //bindpolyfill
 
-Function.prototype.myBind = function () {
-  let arr = [...arguments];
+// Function.prototype.myBind = function () {
+//   let arr = [...arguments];
 
-  let obj = arr.shift();
-  const functionArgs = arr;
+//   let obj = arr.shift();
+//   const functionArgs = arr;
 
-  obj.myfun = this;
+//   obj.myfun = this;
+
+//   return function (...args) {
+//     const result = obj.myfun(...functionArgs, ...args);
+
+//     return result;
+//   };
+// };
+// const withbind = printName.myBind(obj, "Dib", "Assam");
+// withbind();
+
+// function outer() {
+//   let count = 0;
+
+//   return function inner() {
+//     count++;
+//     console.log(count);
+//   };
+// }
+
+// const counter1 = outer();
+// const counter2 = outer();
+
+// counter1();
+// counter1();
+// counter2();
+// counter1();
+// counter2();
+
+// for (var i = 0; i < 3; i++) {
+//   function inner(x) {
+//     setTimeout(function () {
+//       console.log(x);
+//     }, 0);
+//   }
+//   inner(i);
+// }
+
+// Write a function that creates a counter with increment, decrement, and getCount methods,
+// without using a class.
+
+// function counterHelper() {
+//   let count = 0;
+
+//   function increment() {
+//     return ++count;
+//   }
+
+//   function decrement() {
+//     return --count;
+//   }
+//   function getCount() {
+//     return count;
+//   }
+//   return { increment, decrement, getCount };
+// }
+
+// const incrementCounter = counterHelper();
+// console.log(incrementCounter.increment());
+// console.log(incrementCounter.increment());
+
+// function createBankAccount(initialBalance) {
+//   let balance = initialBalance;
+//   function deposit(amount) {
+//     if (amount > 0) balance += amount;
+//   }
+
+//   function withdraw(amount) {
+//     if (amount > 0 && balance > amount) balance -= amount;
+//   }
+//   function getBalance() {
+//     return balance;
+//   }
+//   return { deposit, withdraw, getBalance };
+// }
+
+// const account = createBankAccount(500);
+// account.deposit(200);
+// account.withdraw(100);
+// console.log("Balance is", account.getBalance());
+
+// Closure practice: Implement once()
+
+// Create a higher-order function named once that accepts a function fn and returns a new function.
+
+// Requirements:
+
+// The returned function should execute fn only on its first call.
+// Subsequent calls should not execute fn again.
+// The arguments provided during the first call must be passed to fn.
+// Every call should return the result produced during the first execution.
+// Preserve the caller’s this value.
+
+function once(fn) {
+  let flag = true,
+    result;
 
   return function (...args) {
-    const result = obj.myfun(...functionArgs, ...args);
+    if (!flag) {
+      return result;
+    }
 
+    result = fn(...args);
+    flag = false;
     return result;
   };
-};
-const withbind = printName.myBind(obj, "Dib", "Assam");
-withbind();
+}
+
+function add(a, b) {
+  console.log("Executing add...");
+  return a + b;
+}
+
+const addOnce = once(add);
+
+console.log(addOnce(2, 3));
+// Executing add...
+// 5
+
+console.log(addOnce(10, 20));
+// // 5
+
+console.log(addOnce(100, 200));
+// // 5

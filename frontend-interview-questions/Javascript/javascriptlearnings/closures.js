@@ -1,8 +1,10 @@
 // Closures - function bundled with its lexical environment is called closure. (Function alongwith
 // reference to the variables, not the values)
 
-// Each and every function in js has access to its outer scope (variables and functions present in its parent function)
-// so even when function is executed in sm other scope it still remembers its parents scope where it was
+// Each and every function in js has access to its outer scope (variables and functions present
+// in its parent function)
+// so even when function is executed in sm other scope it still remembers its parents
+//  scope where it was
 // originally present
 
 // function a() {
