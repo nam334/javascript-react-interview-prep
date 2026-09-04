@@ -125,34 +125,87 @@ const obj2 = {
 // Every call should return the result produced during the first execution.
 // Preserve the caller’s this value.
 
-function once(fn) {
-  let flag = true,
-    result;
+// function once(fn) {
+//   let flag = true,
+//     result;
 
-  return function (...args) {
-    if (!flag) {
-      return result;
-    }
+//   return function (...args) {
+//     if (!flag) {
+//       return result;
+//     }
 
-    result = fn(...args);
-    flag = false;
+//     result = fn(...args);
+//     flag = false;
+//     return result;
+//   };
+// }
+
+// function add(a, b) {
+//   console.log("Executing add...");
+//   return a + b;
+// }
+
+// const addOnce = once(add);
+
+// console.log(addOnce(2, 3));
+// // Executing add...
+// // 5
+
+// console.log(addOnce(10, 20));
+// // // 5
+
+// console.log(addOnce(100, 200));
+// // // 5
+
+//CURRYING
+
+// function sum(a) {
+//   return function (b) {
+//     return a + b;
+//   };
+// }
+// console.log(sum(1)(2));
+
+// function sum(result = 0) {
+//   if (result === 0) result += arguments[0];
+
+//   // if (arguments === "undefined") return result;
+//   return function (...args) {
+//     if (args.length === 0) return result;
+//     result = result + args[0];
+
+//     return sum(result);
+//   };
+// }
+// console.log(sum(1)(2)(3)(4)(5)());
+
+// function sum(result = 0) {
+//   const args = [...arguments];
+//   result = 0;
+//   for (let i = 0; i < args.length; i++) result += args[i];
+
+//   return function (...args) {
+//     if (args.length === 0) return result;
+//     for (let i = 0; i < args.length; i++) result += args[i];
+//     return sum(result);
+//   };
+// }
+//console.log(sum(1, 10)(2, 20)(3, 30, 300)(4)(5, 50)());
+
+function sum(result = 0) {
+  const args = [...arguments];
+  result = 0;
+  for (let i = 0; i < args.length; i++) result += args[i];
+  const inner = function (...args) {
+    result += args[0];
+    return sum(result);
+  };
+
+  inner.valueOf = function () {
     return result;
   };
+  return inner;
 }
 
-function add(a, b) {
-  console.log("Executing add...");
-  return a + b;
-}
-
-const addOnce = once(add);
-
-console.log(addOnce(2, 3));
-// Executing add...
-// 5
-
-console.log(addOnce(10, 20));
-// // 5
-
-console.log(addOnce(100, 200));
-// // 5
+const result = sum(1)(2)(3)(4)(5);
+console.log(result.valueOf());
