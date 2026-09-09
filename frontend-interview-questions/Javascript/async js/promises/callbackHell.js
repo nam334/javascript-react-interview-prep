@@ -1,4 +1,4 @@
-const cart = ["shoes", "dress", "pen"];
+// const cart = ["shoes", "dress", "pen"];
 
 //Callback Hell
 //Pyramid of DOOOOM

@@ -1,12 +1,15 @@
-function sum(num) {
-  let result = 0;
-  for (let i = 1; i <= num; i++) result += i;
-  return result;
-}
+console.log("A");
 
-console.log(sum(9));
+const promise = new Promise((resolve) => {
+  console.log("B");
 
-sum(10); // 55
-sum(5); // 15
-sum(3); // 6
-sum(9); // 45
+  resolve("Result");
+
+  console.log("C");
+});
+
+promise.then((value) => {
+  console.log(value);
+});
+
+console.log("D");
