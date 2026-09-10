@@ -100,3 +100,108 @@
 // Auxiliary space - O(1)
 
 // Edge cases handled - null, undefined, if callback is not a function
+
+// const months = ["Jan", "March", "April", "June"];
+// months.splice(1, 0, "Feb");
+// // Inserts at index 1
+// console.log(months);
+// // Expected output: Array ["Jan", "Feb", "March", "April", "June"]
+
+// months.splice(4, 1, "May");
+// // Replaces 1 element at index 4
+// console.log(months);
+// // Expected output: Array ["Jan", "Feb", "March", "April", "May"]
+
+//splice
+
+//index -  0  1  2  3  4
+//  1  2  10 20 30 40 5
+//index -  0  1   2  3  4  5 6
+Array.prototype.mySplice = function (startIndex, deleteCount, ...items) {
+  let arrayLength = this.length;
+  const removedEl = [];
+  let j = 0;
+
+  if (arguments.length === 1) {
+    //deleteCount is omitted
+    for (let i = startIndex; i < arrayLength; i++) {
+      removedEl[j] = this[i];
+      j++;
+    }
+    this.length = startIndex;
+  } else {
+    // deleteCount exceeds the available elements
+    if (deleteCount > arrayLength - startIndex) {
+      deleteCount = arrayLength - startIndex;
+    }
+    if (deleteCount < 0) deleteCount = 0;
+    for (let i = startIndex; i < startIndex + deleteCount; i++) {
+      removedEl[j] = this[i];
+      j++;
+    }
+    //create space
+    let newArrayLength = arrayLength - deleteCount + items.length;
+    for (let i = newArrayLength - 1; i >= startIndex; i--) {
+      if (arrayLength <= 0) break;
+      this[i] = this[arrayLength - 1];
+      arrayLength--;
+    }
+    if (newArrayLength < this.length) {
+      this.length = newArrayLength;
+    }
+
+    //move the elements
+    let p = 0;
+    for (let i = startIndex; i < startIndex + items.length; i++) {
+      this[i] = items[p];
+      p++;
+    }
+  }
+
+  return removedEl;
+};
+
+// const arr = [1, 2, 3, 4, 5];
+
+// const splicedArray = arr.mySplice(1, 3, 10);
+//const splicedArray = arr.mySplice(2, 2, 10, 20, 30, 40);
+//console.log(splicedArray);
+//Edge case 1: Equal numbers of elements deleted and inserted
+// const arr = [1, 2, 3, 4, 5];
+// const removed = arr.mySplice(1, 2, 10, 20);
+// console.log(arr);
+// console.log(removed);
+//Edge case 2: Delete without inserting
+// const arr = [1, 2, 3, 4, 5];
+// const removed = arr.mySplice(1, 2);
+//Edge case 3: deleteCount is omitted
+// const arr = [1, 2, 3, 4, 5];
+
+// const removed = arr.mySplice(2);
+// console.log(removed, arr);
+
+//Edge case 4: deleteCount exceeds available elements
+// const arr = [1, 2, 3, 4, 5];
+
+// const removed = arr.mySplice(2, 10);
+// console.log(removed, arr);
+
+//5. deleteCount exceeds the number of elements available from startIndex.
+// const arr = [1, 2, 3, 4, 5];
+
+// const removed = arr.mySplice(2, 4);
+
+// console.log(arr); // [1, 2]
+// console.log(removed); // [3, 4, 5]
+
+//6. negatice deleteCount
+// const arr = [1, 2, 3, 4, 5];
+
+// const removed = arr.mySplice(2, -2, 10);
+// console.log(removed, arr);
+// Assumptionsptions:
+
+// start is between 0 and array.length.
+// deleteCount is a valid non-negative number.
+// The array is dense—no empty slots.
+// Both start and deleteCount are provided.
