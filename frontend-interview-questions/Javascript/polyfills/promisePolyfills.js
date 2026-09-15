@@ -1,17 +1,17 @@
-let p1 = new Promise(function (resolve) {
+let p1 = new Promise(function (resolve, reject) {
   setTimeout(() => {
-    resolve("p1 resolved");
+    reject("p1 rejected");
   }, 2000);
 });
 let p2 = new Promise(function (resolve, reject) {
   setTimeout(() => {
-    reject("p2 reject");
+    reject("p2 rejected");
   }, 200);
 });
 
-let p3 = new Promise(function (resolve) {
+let p3 = new Promise(function (resolve, reject) {
   setTimeout(() => {
-    resolve("p3 resolved");
+    reject("p3 rejected");
   }, 200);
 });
 // Promise.myAll = function (iterable) {
@@ -73,10 +73,39 @@ let p3 = new Promise(function (resolve) {
 
 //Polyfill of Promise.race
 
-Promise.myRace = function (iterable) {
+// Promise.myRace = function (iterable) {
+//   return new Promise(function (resolve, reject) {
+//     let iterableItems = Array.from(iterable);
+//     if (!iterableItems.length) return resolve([]);
+//     for (let i = 0; i < iterableItems.length; i++) {
+//       let currentPromise = Promise.resolve(iterableItems[i]);
+//       currentPromise
+//         .then((value) => {
+//           resolve(value);
+//           return;
+//         })
+//         .catch(function (err) {
+//           reject(err);
+//           return;
+//         });
+//     }
+//   });
+// };
+
+// Promise.myRace([p1, p2, p3])
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+//Polyfill of Promise.any
+
+Promise.myAny = function (iterable) {
   return new Promise(function (resolve, reject) {
     let iterableItems = Array.from(iterable);
-    if (!iterableItems.length) return resolve([]);
+    if (iterableItems.length === 0) {
+      return reject(new AggregateError([], "All promises were rejected"));
+    }
+    let errors = [],
+      rejectedCount = 0;
     for (let i = 0; i < iterableItems.length; i++) {
       let currentPromise = Promise.resolve(iterableItems[i]);
       currentPromise
@@ -85,13 +114,20 @@ Promise.myRace = function (iterable) {
           return;
         })
         .catch(function (err) {
-          reject(err);
-          return;
+          errors[i] = err;
+          rejectedCount++;
+          if (rejectedCount === iterableItems.length) {
+            let aggregateError = new AggregateError(
+              errors,
+              "All promises were rejected",
+            );
+            reject(aggregateError);
+          }
         });
     }
   });
 };
 
-Promise.myRace([p1, p2, p3])
+Promise.myAny([p1, p2, p3])
   .then((res) => console.log(res))
-  .catch((err) => console.log(err));
+  .catch((err) => console.log(err, err.errors));
