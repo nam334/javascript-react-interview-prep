@@ -15,6 +15,7 @@ const pr2 = new Promise(function (resolve, reject) {
 //   console.log("hello");
 // }
 
+//suspension mechanism
 async function getData() {
   console.log("Hello World 1");
   const result1 = await pr1;

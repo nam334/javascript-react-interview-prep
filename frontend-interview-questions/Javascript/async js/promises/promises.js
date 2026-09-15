@@ -29,6 +29,7 @@
 const cart = ["shoes", "dress", "pen"];
 
 function createOrder(cart) {
+  // Promise.resolve(orderId)
   return new Promise(function (resolve, reject) {
     if (!validateCart(cart)) {
       const error = new Error("Invalid cart");
@@ -82,25 +83,27 @@ function validateCart(cart) {
 const promise = createOrder(cart);
 
 promise
-  .then(function (orderId) {
-    console.log(`1. Order generated for ${orderId}`);
-    return orderId;
-  })
+  // .then(function (orderId) {
+  //   console.log(`1. Order generated for ${orderId}`);
+  //   return orderId;
+  // })
   .then(function (orderId) {
     return proceedToPayment(orderId);
   })
+  // .then(function (data) {
+  //   console.log(data.message);
+  //   return data.orderId;
+  // })
   .then(function (data) {
-    console.log(data.message);
-    return data.orderId;
-  })
-  .then(function (orderId) {
+    const orderId = data.orderId;
     return showOrderSummary(orderId);
   })
+  // .then(function (data) {
+  //   console.log(data.message);
+  //   return data.orderId;
+  // })
   .then(function (data) {
-    console.log(data.message);
-    return data.orderId;
-  })
-  .then(function (orderId) {
+    const orderId = data.orderId;
     return updateWalletBalance(orderId);
   })
   .then(function (data) {
@@ -109,3 +112,17 @@ promise
   .catch(function (err) {
     console.log(err);
   });
+
+promise
+  .then((res) => {
+    //logic
+  })
+  .catch((err) => {});
+promise.then(
+  (res) => {
+    //logic
+  },
+  (err) => {
+    //callback of catch
+  },
+);
