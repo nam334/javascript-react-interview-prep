@@ -1,7 +1,19 @@
-let p1 = Promise.resolve("p1 resolved");
-let p2 = Promise.reject("p2 rejected");
-let p3 = Promise.resolve("p3 resolved");
+let p1 = new Promise(function (resolve) {
+  setTimeout(() => {
+    resolve("p1 resolved");
+  }, 2000);
+});
+let p2 = new Promise(function (resolve, reject) {
+  setTimeout(() => {
+    reject("p2 reject");
+  }, 200);
+});
 
+let p3 = new Promise(function (resolve) {
+  setTimeout(() => {
+    resolve("p3 resolved");
+  }, 200);
+});
 // Promise.myAll = function (iterable) {
 //   return new Promise(function (resolve, reject) {
 //     let iterableItems = Array.from(iterable);
@@ -28,33 +40,58 @@ let p3 = Promise.resolve("p3 resolved");
 
 // Polyfill of Promise.allsetttled
 
-Promise.myAllSettled = function (iterable) {
+// Promise.myAllSettled = function (iterable) {
+//   return new Promise(function (resolve, reject) {
+//     let iterableItems = Array.from(iterable);
+//     if (!iterableItems.length) return resolve([]);
+//     let results = [],
+//       completedCount = 0;
+//     for (let i = 0; i < iterableItems.length; i++) {
+//       let obj = {};
+//       let currentPromise = Promise.resolve(iterableItems[i]);
+//       currentPromise
+//         .then((value) => {
+//           ((obj.status = "fulfilled"), (obj.value = value), (results[i] = obj));
+//         })
+//         .catch(function (err) {
+//           ((obj.status = "rejected"), (obj.reason = err));
+//           results[i] = obj;
+//         })
+//         .finally(function () {
+//           completedCount++;
+//           if (completedCount === iterableItems.length) {
+//             resolve(results);
+//           }
+//         });
+//     }
+//   });
+// };
+
+// Promise.myAllSettled([p1, p2, p3])
+//   .then((res) => console.log(res))
+//   .catch((err) => console.log(err));
+
+//Polyfill of Promise.race
+
+Promise.myRace = function (iterable) {
   return new Promise(function (resolve, reject) {
     let iterableItems = Array.from(iterable);
     if (!iterableItems.length) return resolve([]);
-    let results = [],
-      completedCount = 0;
     for (let i = 0; i < iterableItems.length; i++) {
-      let obj = {};
       let currentPromise = Promise.resolve(iterableItems[i]);
       currentPromise
         .then((value) => {
-          ((obj.status = "fulfilled"), (obj.value = value), (results[i] = obj));
+          resolve(value);
+          return;
         })
         .catch(function (err) {
-          ((obj.status = "rejected"), (obj.reason = err));
-          results[i] = obj;
-        })
-        .finally(function () {
-          completedCount++;
-          if (completedCount === iterableItems.length) {
-            resolve(results);
-          }
+          reject(err);
+          return;
         });
     }
   });
 };
 
-Promise.myAllSettled([p1, p2, p3])
+Promise.myRace([p1, p2, p3])
   .then((res) => console.log(res))
   .catch((err) => console.log(err));
