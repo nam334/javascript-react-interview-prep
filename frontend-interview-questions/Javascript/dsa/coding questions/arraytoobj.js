@@ -52,7 +52,7 @@
 // Space complexity - O(N)
 //time ~ 5mins
 
-//3) find if the string is palindrome or not
+//3) find if the string is palindrome or not-------------------------------------------------
 // Input: "MadAm"
 // Output: true
 
@@ -83,7 +83,7 @@
 // Space complexity - O(n) bcoz input converts to lowercase and creates a ne string
 // ~10mins
 
-//3) Check Whether Two Strings Are Anagrams
+//4) Check Whether Two Strings Are Anagrams----------------------------------------------
 // Input: "Listen", "Silent"
 // Output: true
 
@@ -126,3 +126,53 @@
 // console.log(checkAnagrams("aab", "abb"));
 // Time complexity - O(n + n + n + n) - O(4N) ~ O(N)
 // Space complexity - O(n) (due to map)
+
+//5) Merge two sorted arrays in to one sorted arrays-----------------------------------------
+// arr1 = [1, 3, 5, 7]
+// arr2 = [2, 4, 6, 8]
+
+// Output:
+// [1, 2, 3, 4, 5, 6, 7, 8]
+
+//7.05
+// function mergeSortedArrays(arr1, arr2) {
+//   const sortedArray = [];
+//   let i = 0,
+//     j = 0;
+//   while (i < arr1.length && j < arr2.length) { //O(N+M)
+//     if (arr1[i] < arr2[j]) {
+//       sortedArray.push(arr1[i]);
+//       i++;
+//     } else {
+//       sortedArray.push(arr2[j]);
+//       j++;
+//     }
+//   }
+//   if (i < arr1.length) {
+//     const remainingElements = arr1.slice(i); //O(N)
+//     sortedArray.push(...remainingElements); //O(N)
+//   }
+//   if (j < arr2.length) {
+//     const remainingElements = arr2.slice(j); //O(M)
+//     sortedArray.push(...remainingElements); //O(M)
+//   }
+//   return sortedArray;
+// }
+
+// console.log(mergeSortedArrays([1, 3, 5, 7], [2, 4, 6, 8]));
+
+//Time complexity - O(n + m) + O(n) + O(n) + O(m) + O(m) ~ O(n+m)
+//Space complexity - O(n+m)
+//7.12
+
+//6) sum of N numbers
+// Input: 5
+// Output: 15
+
+// function sumN(num) {
+//   return (num * (num + 1)) / 2;
+// }
+
+// console.log(sumN(5));
+// console.log(sumN(10));
+// 1 + 2 + 3 + 4 + 5 = 15
