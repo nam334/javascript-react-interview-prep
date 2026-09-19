@@ -21,8 +21,23 @@ function dummysetInterval() {
 //   return timerobj;
 // }
 
-// let timerObj = mySetTimeout(dummysetTimeout, 2000);
+function mySetTimeout(cb, delay) {
+  let startTime = performance.now();
+  let timerobj = {};
+  function checkTime(currentTime) {
+    const elapsedTime = currentTime - startTime;
+    if (elapsedTime >= delay) cb();
+    else {
+      timerobj.timer = checkTime(performance.now());
+    }
+  }
+  timerobj.timer = checkTime(performance.now());
+  return timerobj;
+}
 
+let timerObj = mySetTimeout(dummysetTimeout, 2000);
+//let timerObj1 = mySetTimeout(dummysetTimeout, 5000);
+console.log(timerObj);
 //polyfill of cleartimeout
 
 // function myClearTimeout(timerObj) {
@@ -37,30 +52,30 @@ function dummysetInterval() {
 //to chk if myClearTimeout is working -make the timer as 1000
 //polyfill of setInterval
 
-function mySetInterval(cb, delay) {
-  let startTime = performance.now();
-  let timerObj = {};
-  function checkTime(currentTime) {
-    const elapsedTime = currentTime - startTime;
-    if (elapsedTime >= delay) {
-      cb();
-      startTime = currentTime;
-      timerObj.timer = requestAnimationFrame(checkTime);
-    } else {
-      timerObj.timer = requestAnimationFrame(checkTime);
-    }
-  }
-  timerObj.timer = requestAnimationFrame(checkTime);
-  return timerObj;
-}
+// function mySetInterval(cb, delay) {
+//   let startTime = performance.now();
+//   let timerObj = {};
+//   function checkTime(currentTime) {
+//     const elapsedTime = currentTime - startTime;
+//     if (elapsedTime >= delay) {
+//       cb();
+//       startTime = currentTime;
+//       timerObj.timer = requestAnimationFrame(checkTime);
+//     } else {
+//       timerObj.timer = requestAnimationFrame(checkTime);
+//     }
+//   }
+//   timerObj.timer = requestAnimationFrame(checkTime);
+//   return timerObj;
+// }
 
-let timerobj = mySetInterval(dummysetInterval, 2000);
+// let timerobj = mySetInterval(dummysetInterval, 2000);
 
-function myClearInterval(timerobj) {
-  cancelAnimationFrame(timerobj.timer);
-}
+// function myClearInterval(timerobj) {
+//   cancelAnimationFrame(timerobj.timer);
+// }
 
-setTimeout(() => {
-  console.log("Polyfill of clearInterval");
-  myClearInterval(timerobj);
-}, 5500);
+// setTimeout(() => {
+//   console.log("Polyfill of clearInterval");
+//   myClearInterval(timerobj);
+// }, 5500);
