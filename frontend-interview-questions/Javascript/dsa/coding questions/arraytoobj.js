@@ -176,3 +176,58 @@
 // console.log(sumN(5));
 // console.log(sumN(10));
 // 1 + 2 + 3 + 4 + 5 = 15
+
+// 7) Right Rotate an Array by K Positions
+// Input: arr = [1, 2, 3, 4, 5], k = 2
+// Output: [4, 5, 1, 2, 3]
+
+// Input: arr = [10, 20, 30, 40], k = 1
+// Output: [40, 10, 20, 30]
+
+//below function returns a new array---------------------------------------
+
+// function rightRotate(arr, k) {
+//   let arrayLength = arr.length;
+//   let res = [];
+//   for (let i = 0; i < arrayLength; i++) {
+//     let newIndex = i + k; //4
+//     if (newIndex >= arrayLength) {
+//       newIndex = newIndex - arrayLength;
+//     }
+
+//     res[newIndex] = arr[i];
+//   }
+
+//   for (let i = 0; i < arrayLength; i++) {
+//     arr[i] = res[i];
+//   }
+//   return arr;
+// }
+
+// console.log(rightRotate([10, 20, 30, 40], 1));
+// console.log(rightRotate([1, 2, 3, 4, 5], 2));
+
+//below function modifies the original array in O(1) space complexity----------------------------
+
+function rightRotate(arr, k) {
+  let arrayLength = arr.length;
+  if (arrayLength === 0) return arr;
+  k = k % arrayLength;
+  function reverse(ar, start, end) {
+    while (start < end) {
+      let temp = ar[start];
+      ar[start] = ar[end];
+      ar[end] = temp;
+      start++;
+      end--;
+    }
+    return ar;
+  }
+
+  reverse(arr, 0, arrayLength - 1);
+  reverse(arr, 0, k - 1);
+  reverse(arr, k, arrayLength - 1);
+  return arr;
+}
+
+console.log(rightRotate([1, 2, 3, 4, 5], 2));
