@@ -231,3 +231,27 @@ function rightRotate(arr, k) {
 }
 
 console.log(rightRotate([1, 2, 3, 4, 5], 2));
+
+//What is the the Time and Space Complexity of array methods -
+// length - returns the length of an array
+TC = SC = O(1);
+// push - adds one/more element to the end of the array and returns new lwngth of the array
+TC = SC = O(1);
+// pop - removes the lastelement and returns the element
+TC = SC = O(1);
+// shift - removes first element from the array and returns it
+TC = O(N);
+SC = O(1);
+// unshift - adds one/more elemnts to the beginning of the array and returns the new length of the array
+TC = O(N);
+SC = O(1);
+// includes - checks if a value is present in an array or string , returns boolean (true/ false)
+TC = O(N);
+SC = O(1);
+// concat - merges single/ multiple values into a new array and returns it
+TC - O(N + M);
+SC - O(N + M);
+// slice  - returns a shallow copy of a portion of the array, doesn't modify the original array
+TC - O(M);
+SC - O(M);
+//here M is the number of copied elements
