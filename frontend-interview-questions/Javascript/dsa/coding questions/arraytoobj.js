@@ -209,49 +209,63 @@
 
 //below function modifies the original array in O(1) space complexity----------------------------
 
-function rightRotate(arr, k) {
-  let arrayLength = arr.length;
-  if (arrayLength === 0) return arr;
-  k = k % arrayLength;
-  function reverse(ar, start, end) {
-    while (start < end) {
-      let temp = ar[start];
-      ar[start] = ar[end];
-      ar[end] = temp;
-      start++;
-      end--;
-    }
-    return ar;
-  }
+// function rightRotate(arr, k) {
+//   let arrayLength = arr.length;
+//   if (arrayLength === 0) return arr;
+//   k = k % arrayLength;
+//   function reverse(ar, start, end) {
+//     while (start < end) {
+//       let temp = ar[start];
+//       ar[start] = ar[end];
+//       ar[end] = temp;
+//       start++;
+//       end--;
+//     }
+//     return ar;
+//   }
 
-  reverse(arr, 0, arrayLength - 1);
-  reverse(arr, 0, k - 1);
-  reverse(arr, k, arrayLength - 1);
-  return arr;
-}
+//   reverse(arr, 0, arrayLength - 1);
+//   reverse(arr, 0, k - 1);
+//   reverse(arr, k, arrayLength - 1);
+//   return arr;
+// }
 
-console.log(rightRotate([1, 2, 3, 4, 5], 2));
+// console.log(rightRotate([1, 2, 3, 4, 5], 2));
 
-//What is the the Time and Space Complexity of array methods -
-// length - returns the length of an array
-TC = SC = O(1);
-// push - adds one/more element to the end of the array and returns new lwngth of the array
-TC = SC = O(1);
-// pop - removes the lastelement and returns the element
-TC = SC = O(1);
-// shift - removes first element from the array and returns it
-TC = O(N);
-SC = O(1);
-// unshift - adds one/more elemnts to the beginning of the array and returns the new length of the array
-TC = O(N);
-SC = O(1);
-// includes - checks if a value is present in an array or string , returns boolean (true/ false)
-TC = O(N);
-SC = O(1);
-// concat - merges single/ multiple values into a new array and returns it
-TC - O(N + M);
-SC - O(N + M);
-// slice  - returns a shallow copy of a portion of the array, doesn't modify the original array
-TC - O(M);
-SC - O(M);
-//here M is the number of copied elements
+// //What is the the Time and Space Complexity of array methods -
+// // length - returns the length of an array
+// TC = SC = O(1);
+// // push - adds one/more element to the end of the array and returns new lwngth of the array
+// TC = SC = O(1);
+// // pop - removes the lastelement and returns the element
+// TC = SC = O(1);
+// // shift - removes first element from the array and returns it
+// TC = O(N);
+// SC = O(1);
+// // unshift - adds one/more elemnts to the beginning of the array and returns the new length of the array
+// TC = O(N);
+// SC = O(1);
+// // includes - checks if a value is present in an array or string , returns boolean (true/ false)
+// TC = O(N);
+// SC = O(1);
+// // concat - merges single/ multiple values into a new array and returns it
+// TC - O(N + M);
+// SC - O(N + M);
+// // slice  - returns a shallow copy of a portion of the array, doesn't modify the original array
+// TC - O(M);
+// SC - O(M);
+// //here M is the number of copied elements
+
+//What is the Time and Space Complexity of Object methods - Keys, Value, Entries
+
+// Keys - returns all the keys of an object in array format
+// TC - O(N)
+// SC - O(N)
+
+// Values - returns all the values of an object in array format
+// TC - O(N)
+// SC - O(N)
+
+// Entries - retuns an array of key value pairs of an object
+// TC - O(N)
+// SC - O(N)
