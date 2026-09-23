@@ -1,7 +1,8 @@
 // Event Emitter
 
 // An Event Emitter is a design pattern that allows different parts of an application to communicate using events.
-
+// An Event Emitter allows one part of an application to announce that something happened,
+// while other parts can independently respond to it.
 // It mainly follows three steps:
 
 // Subscribe → Emit → Unsubscribe
