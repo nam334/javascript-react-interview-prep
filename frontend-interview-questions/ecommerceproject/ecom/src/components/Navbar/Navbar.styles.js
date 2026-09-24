@@ -1,7 +1,6 @@
 import styled from "styled-components";
-import { FiShoppingCart } from "react-icons/fi";
 
-const NavbarContainer = styled.nav`
+export const NavbarContainer = styled.nav`
   width: 100%;
   min-height: 64px;
   padding: 0 32px;
@@ -15,7 +14,7 @@ const NavbarContainer = styled.nav`
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 `;
 
-const BrandName = styled.h2`
+export const BrandName = styled.h2`
   margin: 0;
   color: rgb(100, 116, 139);
   font-size: 24px;
@@ -23,7 +22,7 @@ const BrandName = styled.h2`
   letter-spacing: -0.5px;
 `;
 
-const CartButton = styled.button`
+export const CartButton = styled.button`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -49,18 +48,3 @@ const CartButton = styled.button`
     transform: translateY(-1px);
   }
 `;
-const Navbar = () => {
-  return (
-    <>
-      <NavbarContainer>
-        <BrandName>ShopEase</BrandName>
-        <CartButton type="button" aria-label="Open shopping cart">
-          <FiShoppingCart />
-          <span>0 items</span>
-        </CartButton>
-      </NavbarContainer>
-    </>
-  );
-};
-
-export default Navbar;

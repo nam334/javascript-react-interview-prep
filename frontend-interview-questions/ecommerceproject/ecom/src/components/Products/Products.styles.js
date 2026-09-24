@@ -1,7 +1,6 @@
-import { FiPlus, FiShoppingCart, FiStar } from "react-icons/fi";
 import styled from "styled-components";
 
-const ProductsGrid = styled.section`
+export const ProductsGrid = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 24px;
@@ -12,7 +11,7 @@ const ProductsGrid = styled.section`
   padding: 0 24px;
 `;
 
-const ProductCard = styled.article`
+export const ProductCard = styled.article`
   display: flex;
   flex-direction: column;
 
@@ -33,7 +32,7 @@ const ProductCard = styled.article`
   }
 `;
 
-const ImageContainer = styled.div`
+export const ImageContainer = styled.div`
   height: 190px;
   padding: 16px;
   margin-bottom: 16px;
@@ -46,13 +45,13 @@ const ImageContainer = styled.div`
   border-radius: 8px;
 `;
 
-const ProductImage = styled.img`
+export const ProductImage = styled.img`
   width: 100%;
   height: 100%;
   object-fit: contain;
 `;
 
-const ProductTitle = styled.h3`
+export const ProductTitle = styled.h3`
   margin: 0 0 12px;
 
   color: #475569;
@@ -67,7 +66,7 @@ const ProductTitle = styled.h3`
   -webkit-line-clamp: 2;
 `;
 
-const ProductDetails = styled.div`
+export const ProductDetails = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -75,7 +74,7 @@ const ProductDetails = styled.div`
   margin-top: auto;
 `;
 
-const ProductPrice = styled.p`
+export const ProductPrice = styled.p`
   margin: 0;
 
   color: #475569;
@@ -83,7 +82,7 @@ const ProductPrice = styled.p`
   font-weight: 600;
 `;
 
-const Rating = styled.div`
+export const Rating = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
@@ -97,7 +96,7 @@ const Rating = styled.div`
   }
 `;
 
-const CardActions = styled.div`
+export const CardActions = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,7 +105,7 @@ const CardActions = styled.div`
   margin-top: 16px;
 `;
 
-const IconButton = styled.button`
+export const IconButton = styled.button`
   width: 40px;
   height: 40px;
   padding: 0;
@@ -142,54 +141,3 @@ const IconButton = styled.button`
     outline-offset: 2px;
   }
 `;
-const Products = ({ products }) => {
-  return (
-    <>
-      <ProductsGrid>
-        {products.map((product) => (
-          <ProductCard key={product.id}>
-            <ImageContainer>
-              <ProductImage
-                src={product.image}
-                alt={product.title}
-                loading="lazy"
-              />
-            </ImageContainer>
-
-            <ProductTitle title={product.title}>{product.title}</ProductTitle>
-
-            <ProductDetails>
-              <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
-
-              <Rating aria-label={`Rating: ${product.rating.rate} out of 5`}>
-                <FiStar />
-                <span>{product.rating.rate}</span>
-              </Rating>
-            </ProductDetails>
-
-            <CardActions>
-              <IconButton
-                type="button"
-                aria-label={`View ${product.title} in cart`}
-                title="Cart"
-              >
-                <FiShoppingCart />
-              </IconButton>
-
-              <IconButton
-                type="button"
-                $variant="primary"
-                aria-label={`Add ${product.title} to cart`}
-                title="Add to cart"
-              >
-                <FiPlus />
-              </IconButton>
-            </CardActions>
-          </ProductCard>
-        ))}
-      </ProductsGrid>
-    </>
-  );
-};
-
-export default Products;
