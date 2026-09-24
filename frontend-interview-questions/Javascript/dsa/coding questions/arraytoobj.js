@@ -231,7 +231,7 @@
 // }
 
 // console.log(rightRotate([1, 2, 3, 4, 5], 2));
-
+//reindexing
 // //What is the the Time and Space Complexity of array methods -
 // // length - returns the length of an array
 // TC = SC = O(1);
