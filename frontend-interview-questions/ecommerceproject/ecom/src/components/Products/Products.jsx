@@ -11,13 +11,16 @@ import {
   CardActions,
   IconButton,
 } from "./Products.styles";
+import { useContext } from "react";
+import { ThemeContext } from "../../context/ThemeContext";
 
 const Products = ({ products }) => {
+  const { theme } = useContext(ThemeContext);
   return (
     <>
       <ProductsGrid>
         {products.map((product) => (
-          <ProductCard key={product.id}>
+          <ProductCard key={product.id} $mode={theme}>
             <ImageContainer>
               <ProductImage
                 src={product.image}
@@ -26,12 +29,19 @@ const Products = ({ products }) => {
               />
             </ImageContainer>
 
-            <ProductTitle title={product.title}>{product.title}</ProductTitle>
+            <ProductTitle title={product.title} $mode={theme}>
+              {product.title}
+            </ProductTitle>
 
             <ProductDetails>
-              <ProductPrice>${product.price.toFixed(2)}</ProductPrice>
+              <ProductPrice $mode={theme}>
+                ${product.price.toFixed(2)}
+              </ProductPrice>
 
-              <Rating aria-label={`Rating: ${product.rating.rate} out of 5`}>
+              <Rating
+                aria-label={`Rating: ${product.rating.rate} out of 5`}
+                $mode={theme}
+              >
                 <FiStar />
                 <span>{product.rating.rate}</span>
               </Rating>

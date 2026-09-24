@@ -14,14 +14,12 @@ export const ProductsGrid = styled.section`
 export const ProductCard = styled.article`
   display: flex;
   flex-direction: column;
-
   min-height: 390px;
   padding: 18px;
-
-  background-color: #ffffff;
+  background-color: ${({ $mode }) =>
+    $mode === "light" ? "#ffffff" : "#131d2c"};
   border: 1px solid #e5e7eb;
   border-radius: 12px;
-
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -53,8 +51,7 @@ export const ProductImage = styled.img`
 
 export const ProductTitle = styled.h3`
   margin: 0 0 12px;
-
-  color: #475569;
+  color: ${({ $mode }) => ($mode === "light" ? "#475569" : "#ffffff")};
   font-size: 16px;
   font-weight: 600;
   line-height: 1.4;
@@ -76,8 +73,8 @@ export const ProductDetails = styled.div`
 
 export const ProductPrice = styled.p`
   margin: 0;
+  color: ${({ $mode }) => ($mode === "light" ? "#475569" : "#ffffff")};
 
-  color: #475569;
   font-size: 17px;
   font-weight: 600;
 `;
@@ -87,7 +84,7 @@ export const Rating = styled.div`
   align-items: center;
   gap: 4px;
 
-  color: #4b5563;
+  color: ${({ $mode }) => ($mode === "light" ? "#475569" : "#ffffff")};
   font-size: 14px;
 
   svg {
