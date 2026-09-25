@@ -1,3 +1,26 @@
+// A Service Worker is a JavaScript file that runs separately from the webpage
+// and acts like a middle layer between the application and the network.
+// Because it can intercept network requests, it can decide:
+
+// Fetch the resource from the internet.
+// Return a previously cached version.
+// Update the cache.
+// Provide an offline fallback.
+
+// Its main practical uses are:
+
+// Offline support
+// Faster loading using caching
+// Push notifications
+// Background synchronization
+// Building Progressive Web Apps (PWAs)
+
+// A Service Worker generally goes through three important stages:
+
+// Register — the page tells the browser about the Service Worker.
+// Install — static files can be added to the cache.
+// Activate — old caches can be cleaned up and the new worker takes control.
+
 //A cache name lets us identify and manage a particular cache
 // The cache stores copies of important application files inside the browser.
 // If the internet is unavailable, that request fails.
