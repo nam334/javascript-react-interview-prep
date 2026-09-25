@@ -1,4 +1,4 @@
-import { FiPlus, FiShoppingCart, FiStar } from "react-icons/fi";
+import { FiHeart, FiPlus, FiStar } from "react-icons/fi";
 import {
   ProductsGrid,
   ProductCard,
@@ -13,9 +13,19 @@ import {
 } from "./Products.styles";
 import { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleWishlist } from "../../store/wishlistSlice";
+import { AiFillHeart } from "react-icons/ai";
 
 const Products = ({ products }) => {
   const { theme } = useContext(ThemeContext);
+  const wishlistedProducts = useSelector((state) => state.wishlist);
+
+  const dispatch = useDispatch();
+  const wishlistHandler = (id) => {
+    dispatch(toggleWishlist(id));
+  };
+
   return (
     <>
       <ProductsGrid>
@@ -50,10 +60,15 @@ const Products = ({ products }) => {
             <CardActions>
               <IconButton
                 type="button"
-                aria-label={`View ${product.title} in cart`}
-                title="Cart"
+                aria-label={`Add ${product.title} to wishlist`}
+                title="Add to wishlist"
+                onClick={() => wishlistHandler(product.id)}
               >
-                <FiShoppingCart />
+                {wishlistedProducts.includes(product.id) ? (
+                  <AiFillHeart />
+                ) : (
+                  <FiHeart />
+                )}
               </IconButton>
 
               <IconButton
