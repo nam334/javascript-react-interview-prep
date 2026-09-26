@@ -42,26 +42,27 @@ export const ThemeButton = styled.button`
 export const CartButton = styled.button`
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 14px;
-  color: #ffffff;
-  background-color: rgb(100, 116, 139);
-  border: none;
+  gap: 10px;
+  padding: 8px 18px;
+  border: 0;
   border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
+  background: #f47e83;
+  color: white;
   cursor: pointer;
-
-  transition:
-    background-color 0.2s ease,
-    transform 0.2s ease;
-
+  &:hover {
+    background: #526176;
+  }
   svg {
-    font-size: 22px;
+    width: 26px;
+    height: 26px;
   }
 
-  &:hover {
-    background-color: #f28482;
-    transform: translateY(-1px);
+  .cart-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    font-weight: 600;
+    line-height: 1.2;
   }
 `;

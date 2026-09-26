@@ -138,3 +138,44 @@ export const IconButton = styled.button`
     outline-offset: 2px;
   }
 `;
+export const QuantityControl = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 38px;
+  padding: 3px;
+  border: 1px solid #d9e2ec;
+  border-radius: 10px;
+  background: #f8fafc;
+`;
+
+export const QuantityButton = styled.button`
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 7px;
+  background: transparent;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  font-size: 22px;
+
+  &:hover {
+    background: #e2e8f0;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+  }
+`;
+
+export const QuantityValue = styled.span`
+  min-width: 22px;
+  text-align: center;
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 600;
+`;
