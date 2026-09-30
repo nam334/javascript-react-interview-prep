@@ -10,3 +10,9 @@ export const ProductsGrid = styled.section`
   margin: 32px auto;
   padding: 0 24px;
 `;
+
+export const Wrapper = styled.div`
+  display: flex;
+  align-items: flex-start;
+  gap: 24px;
+`;
