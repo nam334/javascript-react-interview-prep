@@ -29,7 +29,7 @@ const Navbar = () => {
             <FiShoppingCart aria-hidden="true" />
             <span className="cart-summary">
               <span>{totalQuantity} items</span>
-              <span>₹ {totalPrice}</span>
+              <span>$ {totalPrice}</span>
             </span>
           </CartButton>
         </SideDiv>
