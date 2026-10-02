@@ -8,6 +8,8 @@ import {
   PriceLabels,
   SidebarDiv,
   SidebarTitle,
+  SortContainer,
+  SortSelect,
 } from "./Sidebar.styles";
 
 const Sidebar = ({
@@ -18,6 +20,8 @@ const Sidebar = ({
   setMaxPrice,
   maxPrice,
   minPrice,
+  sortBy,
+  setSortBy,
   selectedPrice,
   setSelectedPrice,
 }) => {
@@ -30,6 +34,7 @@ const Sidebar = ({
   const allCategories = getCategories(products);
   const [isChecked, setIsChecked] = useState([]);
   const [currentRatedItem, setCurrentRatedItem] = useState("");
+
   const categoryHandler = (category) => {
     if (!isChecked.includes(category))
       setIsChecked((prev) => [...prev, category]);
@@ -96,6 +101,16 @@ const Sidebar = ({
   };
   return (
     <SidebarDiv>
+      <SortContainer>
+        {/* <SortLabel htmlFor="sort-products">Sort By:</SortLabel> */}
+        <SidebarTitle>Sort By:</SidebarTitle>
+        <SortSelect value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+          <option value="">Default</option>
+          <option value="price-low-high">Price: Low to High</option>
+          <option value="price-high-low">Price: High to Low</option>
+          <option value="rating-high-low">Rating: High to Low</option>
+        </SortSelect>
+      </SortContainer>
       <SidebarTitle>Filters</SidebarTitle>
 
       {isChecked?.map((category) => (

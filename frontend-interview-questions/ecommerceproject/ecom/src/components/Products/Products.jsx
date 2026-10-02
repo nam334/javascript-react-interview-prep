@@ -16,6 +16,8 @@ const Products = ({ products }) => {
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
   const [selectedPrice, setSelectedPrice] = useState(0);
+  const [sortBy, setSortBy] = useState("");
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,14 +32,13 @@ const Products = ({ products }) => {
     dispatch(addToCart(product));
   };
 
-  const fetchFilteredProducts = products?.filter((product) =>
-    selectedCategories.includes(product.category),
-  );
+  // const fetchFilteredProducts = products?.filter((product) =>
+  //   selectedCategories.includes(product.category),
+  // );
 
-  const fetchRatedProducts = products?.filter(
-    (product) => product.rating.rate > selectedRating,
-  );
-
+  // const fetchRatedProducts = products?.filter(
+  //   (product) => product.rating.rate > selectedRating,
+  // );
   const finalFilteredProducts = products.filter((product) => {
     let matchesCategory = selectedCategories.includes(product.category);
     let matchesRating = product.rating.rate > selectedRating;
@@ -47,6 +48,14 @@ const Products = ({ products }) => {
     if (selectedPrice === 0) matchesPrice = true;
     if (matchesCategory && matchesRating && matchesPrice) return product;
   });
+  let sortedProducts = [...finalFilteredProducts];
+  if (sortBy === "price-low-high")
+    sortedProducts.sort((a, b) => a.price - b.price);
+  else if (sortBy === "price-high-low")
+    sortedProducts.sort((a, b) => b.price - a.price);
+  else if (sortBy === "rating-high-low")
+    sortedProducts.sort((a, b) => b.rating.rate - a.rating.rate);
+
   return (
     <>
       <Wrapper>
@@ -60,37 +69,27 @@ const Products = ({ products }) => {
           maxPrice={maxPrice}
           selectedPrice={selectedPrice}
           setSelectedPrice={setSelectedPrice}
+          sortBy={sortBy}
+          setSortBy={setSortBy}
         />
         <ProductsGrid>
-          {selectedCategories?.length ||
-          selectedRating != "" ||
-          selectedPrice > 0
-            ? finalFilteredProducts?.map((product) => {
-                return (
-                  <EnhancedProductItem
-                    product={product}
-                    cartProduct={cartProduct}
-                    theme={theme}
-                    wishlistedProducts={wishlistedProducts}
-                    wishlistHandler={wishlistHandler}
-                    addToCartHandler={addToCartHandler}
-                    decreaseQuantity={decreaseQuantity}
-                  />
-                );
-              })
-            : products?.map((product) => {
-                return (
-                  <EnhancedProductItem
-                    product={product}
-                    cartProduct={cartProduct}
-                    theme={theme}
-                    wishlistedProducts={wishlistedProducts}
-                    wishlistHandler={wishlistHandler}
-                    addToCartHandler={addToCartHandler}
-                    decreaseQuantity={decreaseQuantity}
-                  />
-                );
-              })}
+          {sortedProducts?.length > 0 ? (
+            sortedProducts?.map((product) => {
+              return (
+                <EnhancedProductItem
+                  product={product}
+                  cartProduct={cartProduct}
+                  theme={theme}
+                  wishlistedProducts={wishlistedProducts}
+                  wishlistHandler={wishlistHandler}
+                  addToCartHandler={addToCartHandler}
+                  decreaseQuantity={decreaseQuantity}
+                />
+              );
+            })
+          ) : (
+            <p>No products found</p>
+          )}
         </ProductsGrid>
       </Wrapper>
     </>

@@ -113,3 +113,28 @@ export const FilterChip = styled.div`
     transform: scale(1.15);
   }
 `;
+export const SortContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 4px;
+  margin-bottom: 15px;
+`;
+
+export const SortLabel = styled.label`
+  font-size: 14px;
+  font-weight: 500;
+`;
+
+export const SortSelect = styled.select`
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  outline: none;
+
+  &:focus {
+    border-color: #6b7280;
+  }
+`;
