@@ -87,3 +87,29 @@ export const ClearFiltersButton = styled.button`
     background-color: #f3f4f6;
   }
 `;
+
+export const FilterChip = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+
+  width: fit-content;
+  padding: 6px 10px;
+
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+
+  font-size: 14px;
+  color: #374151;
+
+  svg {
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  svg:hover {
+    transform: scale(1.15);
+  }
+`;

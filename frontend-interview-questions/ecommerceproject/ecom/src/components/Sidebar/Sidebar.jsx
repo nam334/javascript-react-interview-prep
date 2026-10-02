@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { RxCross2 } from "react-icons/rx";
 import {
   ClearFiltersButton,
+  FilterChip,
   FilterSection,
   FilterTitle,
   PriceLabels,
@@ -75,10 +77,39 @@ const Sidebar = ({
     setMaxPrice(Math.max(...allPrices));
   }, [products]);
 
+  const clearFilters = () => {
+    setSelectedCategories([]);
+    setSelectedRating("");
+    setMinPrice("");
+    setMaxPrice("");
+    setSelectedPrice(0);
+    setIsChecked([]);
+    setCurrentRatedItem("");
+  };
+
+  const removeSelectedCategoryHandler = (selectedCategory) => {
+    console.log("click");
+    const updatedCategory = isChecked?.filter(
+      (category) => category !== selectedCategory,
+    );
+    setIsChecked(updatedCategory);
+  };
   return (
     <SidebarDiv>
       <SidebarTitle>Filters</SidebarTitle>
-      <ClearFiltersButton type="button">Clear all</ClearFiltersButton>
+
+      {isChecked?.map((category) => (
+        <div>
+          <FilterChip>
+            <RxCross2 onClick={() => removeSelectedCategoryHandler(category)} />{" "}
+            {category}
+          </FilterChip>
+        </div>
+      ))}
+
+      <ClearFiltersButton type="button" onClick={clearFilters}>
+        Clear all
+      </ClearFiltersButton>
       <FilterSection>
         <FilterTitle>Category</FilterTitle>
         {allCategories?.map((category) => (
