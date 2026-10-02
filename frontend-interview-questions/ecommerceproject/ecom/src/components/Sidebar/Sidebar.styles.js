@@ -1,14 +1,15 @@
 import styled from "styled-components";
 
-export const SidebarDiv = styled.div`
-  width: 240px;
-  flex-shrink: 0;
+export const SidebarDiv = styled.aside`
+  width: 230px;
+  min-width: 230px;
+  padding: 20px;
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 10px;
-  padding: 20px;
-  min-height: 300px;
+  border-radius: 12px;
+  height: fit-content;
 `;
+
 export const SidebarTitle = styled.h2`
   margin: 0 0 20px;
   font-size: 20px;
@@ -19,11 +20,70 @@ export const SidebarTitle = styled.h2`
 export const FilterSection = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 10px;
+  padding: 16px 0;
+  border-top: 1px solid #e5e7eb;
+
+  label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    color: #4b5563;
+    cursor: pointer;
+  }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    cursor: pointer;
+  }
+
+  input[type="range"] {
+    width: 100%;
+    cursor: pointer;
+  }
 `;
 
-export const FilterTitle = styled.h2`
-  margin: 0 0 20px;
+export const FilterTitle = styled.h3`
+  margin: 0 0 4px;
   font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+`;
+
+export const PriceLabels = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 12px;
+  color: #6b7280;
+`;
+export const ClearFiltersButton = styled.button`
+  width: 100%;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+
+  background: transparent;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+
+  font-size: 13px;
   font-weight: 500;
-  color: #1f2937;
+  color: #4b5563;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+
+  &:hover {
+    background-color: #f9fafb;
+    border-color: #9ca3af;
+  }
+
+  &:active {
+    background-color: #f3f4f6;
+  }
 `;

@@ -1,5 +1,5 @@
 import { ProductsGrid, Wrapper } from "./Products.styles";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleWishlist } from "../../store/wishlistSlice";
@@ -13,7 +13,14 @@ const Products = ({ products }) => {
   const cartProduct = useSelector((state) => state.cart);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedRating, setSelectedRating] = useState("");
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState(0);
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    setSelectedPrice(maxPrice);
+  }, [maxPrice]);
 
   const wishlistHandler = (id) => {
     dispatch(toggleWishlist(id));
@@ -34,9 +41,11 @@ const Products = ({ products }) => {
   const finalFilteredProducts = products.filter((product) => {
     let matchesCategory = selectedCategories.includes(product.category);
     let matchesRating = product.rating.rate > selectedRating;
+    let matchesPrice = product.price <= selectedPrice;
     if (!selectedCategories?.length) matchesCategory = true;
     if (selectedRating === "") matchesRating = true;
-    if (matchesCategory && matchesRating) return product;
+    if (selectedPrice === 0) matchesPrice = true;
+    if (matchesCategory && matchesRating && matchesPrice) return product;
   });
   return (
     <>
@@ -45,9 +54,17 @@ const Products = ({ products }) => {
           products={products}
           setSelectedCategories={setSelectedCategories}
           setSelectedRating={setSelectedRating}
+          setMinPrice={setMinPrice}
+          setMaxPrice={setMaxPrice}
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          selectedPrice={selectedPrice}
+          setSelectedPrice={setSelectedPrice}
         />
         <ProductsGrid>
-          {selectedCategories?.length || selectedRating != "" > 0
+          {selectedCategories?.length ||
+          selectedRating != "" ||
+          selectedPrice > 0
             ? finalFilteredProducts?.map((product) => {
                 return (
                   <EnhancedProductItem
