@@ -1,20 +1,42 @@
 //brute force
-function longestSubarraySumK(arr, target) {
-  let n = arr.length,
-    maxLength = -Infinity;
-  for (let i = 0; i < n; i++) {
-    sum = 0;
-    for (let j = i; j < n; j++) {
-      sum += arr[j];
-      if (sum === target) {
-        maxLength = Math.max(maxLength, j - i + 1);
-      }
-    }
-  }
-  if (maxLength !== -Infinity) return maxLength;
-  else return 0;
-}
+// function longestSubarraySumK(arr, target) {
+//   let n = arr.length,
+//     maxLength = -Infinity;
+//   for (let i = 0; i < n; i++) {
+//     sum = 0;
+//     for (let j = i; j < n; j++) {
+//       sum += arr[j];
+//       if (sum === target) {
+//         maxLength = Math.max(maxLength, j - i + 1);
+//       }
+//     }
+//   }
+//   if (maxLength !== -Infinity) return maxLength;
+//   else return 0;
+// }
 
+//better solution - prefix sum
+
+// function longestSubarraySumK(arr, k) {
+//   let myMap = new Map();
+//   let sum = 0,
+//     count = 0,
+//     n = arr.length;
+//   for (let i = 0; i < n; i++) {
+//     sum += arr[i];
+//     if (sum === k) count = i + 1;
+
+//     if (myMap.has(sum - k)) {
+//       let value = myMap.get(sum - k);
+//       count = Math.max(count, i - value);
+//     }
+//     if (!myMap.has(sum)) myMap.set(sum, i);
+//   }
+//   return count;
+// }
+
+// TC - O(n);
+// SC - O(n);
 console.log(longestSubarraySumK([10, 5, 2, 7, 1, 9], 15)); // 4
 
 console.log(longestSubarraySumK([1, 2, 3, 4, 5], 15)); // 5 — whole array
