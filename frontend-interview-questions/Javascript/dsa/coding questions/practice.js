@@ -101,11 +101,27 @@ function sortProducts(products, key, direction = "asc") {
   return sortedProducts;
 }
 
+function paginate(products, page = 1, pageSize = 10) {
+  // Your implementation
+
+  let start, end;
+  start = (page - 1) * pageSize;
+  end = start + pageSize;
+  return products.slice(start, end);
+}
+
 async function main() {
   mainContainer.innerHTML = "Loading..";
   try {
     const products = await fetchProducts();
-    mainContainer.innerHTML = renderProducts(products);
+    const filteredProducts = filterProducts(products, {
+      category: "beauty",
+      minPrice: 10,
+    });
+    const sortedProducts = sortProducts(filteredProducts, "price", "asc");
+    const paginatedProducts = paginate(sortedProducts, 1, 5);
+
+    mainContainer.innerHTML = renderProducts(paginatedProducts);
   } catch (err) {
     mainContainer.innerHTML = "Failed to load products.";
   }
