@@ -26,6 +26,7 @@ const Sidebar = ({
   setSelectedPrice,
 }) => {
   //categories------------------------------------------------
+  //move it below
   const getCategories = (products) => {
     let mySet = new Set();
     products?.map((product) => mySet.add(product.category));
