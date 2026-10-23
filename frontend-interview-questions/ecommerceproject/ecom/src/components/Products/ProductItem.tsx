@@ -12,10 +12,23 @@ import {
   QuantityControl,
   QuantityButton,
   QuantityValue,
-} from "./ProductItem.styles";
+} from "./ProductItem.styles.js";
 import { AiFillHeart } from "react-icons/ai";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { useDispatch } from "react-redux";
+import type { CartItem, Product } from "../../types/product.js";
+import type { decreaseQuantity } from "../../store/cartSlice.js";
+
+interface ProductItemProps {
+  product: Product;
+  cartProduct: CartItem[];
+  theme: string ;
+  wishlistedProducts: number[];
+  wishlistHandler: (id: number) =>void ;
+  addToCartHandler: (product: Product)=> void;
+  decreaseQuantity: typeof decreaseQuantity
+}
+
 
 const ProductItem = ({
   product,
@@ -26,7 +39,7 @@ const ProductItem = ({
   wishlistHandler,
   addToCartHandler,
   decreaseQuantity,
-}) => {
+}: ProductItemProps) => {
   const cartItem = cartProduct.find((item) => item.id === product.id);
   const dispatch = useDispatch();
 

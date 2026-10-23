@@ -10,7 +10,7 @@ import {
   SidebarTitle,
   SortContainer,
   SortSelect,
-} from "./Sidebar.styles";
+} from "./Sidebar.styles.js";
 
 const Sidebar = ({
   products,

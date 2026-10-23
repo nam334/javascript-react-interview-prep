@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice , type PayloadAction} from "@reduxjs/toolkit";
+import type { CartItem, Product } from "../types/product.js";
 
-const initialState = [];
+const initialState: CartItem[] = [];
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
-    addToCart(state, action) {
+    addToCart(state, action : PayloadAction<Product>) {
       //first chk if product is present
       console.log(action.payload);
       const newProduct = action.payload;
@@ -22,26 +23,25 @@ const cartSlice = createSlice({
         });
       } else {
         //add the product
-        let newProduct = action.payload;
-        if (!newProduct.qty) newProduct.qty = 1;
-        state.push(newProduct);
+        // let newProduct = action.payload;
+        // if (!newProduct.qty) newProduct.qty = 1;
+        // state.push(newProduct);
+        const newCartItem : CartItem = {
+          ...action.payload,
+          qty:1,
+        }
+        state.push(newCartItem)
       }
     },
-    decreaseQuantity(state, action) {
-      // return state.map((product) => {
-      //   if (product.id === action.payload) {
-      //     if (product.qty - 1 == 0)
-      //       return state.filter((product) => product.id !== action.payload);
-      //     else return { ...product, qty: product.qty - 1 };
-      //   } else return product;
-      // });
-
+    decreaseQuantity(state, action: PayloadAction<number>) {
+    
       //find the product
-      let product = state.filter(
+      let product = state.find(
         (productItem) => productItem.id === action.payload,
       );
+      if(!product) return
       //chk the quantity
-      if (product[0].qty - 1 === 0) {
+      if (product.qty - 1 === 0) {
         console.log(product);
 
         return state.filter((productItem) => productItem.id !== action.payload);
@@ -53,7 +53,7 @@ const cartSlice = createSlice({
         });
       }
     },
-    deleteFromCart(state, action) {
+    deleteFromCart(state, action : PayloadAction<number>) {
       //it will take id as input
       return state.filter((product) => product.id !== action.payload);
     },

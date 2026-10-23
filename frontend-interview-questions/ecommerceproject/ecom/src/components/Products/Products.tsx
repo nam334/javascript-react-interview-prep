@@ -1,34 +1,41 @@
-import { ProductsGrid, Wrapper } from "./Products.styles";
+import { ProductsGrid, Wrapper } from "./Products.styles.js";
 import { useContext, useEffect, useState } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../../context/ThemeContext.jsx";
 import { useDispatch, useSelector } from "react-redux";
-import { toggleWishlist } from "../../store/wishlistSlice";
-import { addToCart, decreaseQuantity } from "../../store/cartSlice";
-import { EnhancedProductItem } from "../../hoc/withTopRated";
-import Sidebar from "../Sidebar/Sidebar";
+import { toggleWishlist } from "../../store/wishlistSlice.js";
+import { addToCart, decreaseQuantity } from "../../store/cartSlice.js";
+import { EnhancedProductItem } from "../../hoc/withTopRated.jsx";
+import Sidebar from "../Sidebar/Sidebar.jsx";
+import type { CartItem, Product } from "../../types/product.js"; 
+import type { RootState } from "../../store/store.js";
 
-const Products = ({ products }) => {
-  const { theme } = useContext(ThemeContext);
-  const wishlistedProducts = useSelector((state) => state.wishlist);
-  const cartProduct = useSelector((state) => state.cart);
-  const [selectedCategories, setSelectedCategories] = useState([]);
+
+const Products = ({products } : {products: Product[]}) => {
+  const themeContext = useContext(ThemeContext);
+  if (!themeContext) {
+  throw new Error("Products must be used inside ThemeProvider");
+}
+  const {theme} = themeContext;
+  const wishlistedProducts = useSelector((state : RootState) => state.wishlist);
+  const cartProduct = useSelector((state : RootState) => state.cart);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]); 
   const [selectedRating, setSelectedRating] = useState("");
-  const [minPrice, setMinPrice] = useState("");
-  const [maxPrice, setMaxPrice] = useState("");
-  const [selectedPrice, setSelectedPrice] = useState(0);
-  const [sortBy, setSortBy] = useState("");
+  const [minPrice, setMinPrice] = useState<string>("");
+  const [maxPrice, setMaxPrice] = useState<string>("");
+  const [selectedPrice, setSelectedPrice] = useState<number>(0);
+  const [sortBy, setSortBy] = useState<string>("");
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setSelectedPrice(maxPrice);
+    setSelectedPrice(Number(maxPrice));
   }, [maxPrice]);
 
-  const wishlistHandler = (id) => {
+  const wishlistHandler = (id : number) => {
     dispatch(toggleWishlist(id));
   };
 
-  const addToCartHandler = (product) => {
+  const addToCartHandler = (product : Product) => {
     dispatch(addToCart(product));
   };
 
@@ -41,7 +48,7 @@ const Products = ({ products }) => {
   // );
   const finalFilteredProducts = products.filter((product) => {
     let matchesCategory = selectedCategories.includes(product.category);
-    let matchesRating = product.rating.rate > selectedRating;
+    let matchesRating = product.rating.rate > Number(selectedRating);
     let matchesPrice = product.price <= selectedPrice;
     if (!selectedCategories?.length) matchesCategory = true;
     if (selectedRating === "") matchesRating = true;

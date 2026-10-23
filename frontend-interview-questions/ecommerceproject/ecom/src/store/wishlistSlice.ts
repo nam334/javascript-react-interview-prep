@@ -1,13 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice,type PayloadAction } from "@reduxjs/toolkit";
 
 //below array will hold a list of ids of all products added to the wishlist
-const initialState = [];
+const initialState : number[] = [];
 console.log("initial state from slice", initialState);
 const wishlist = createSlice({
   name: "wishlist",
   initialState,
   reducers: {
-    toggleWishlist(state, action) {
+    toggleWishlist(state, action: PayloadAction<number>) {
       //chk if the product is not added in the state
       let productId = action.payload;
       let isProductPresent = state.includes(productId);
