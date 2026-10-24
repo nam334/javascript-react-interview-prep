@@ -11,7 +11,21 @@ import {
   SortContainer,
   SortSelect,
 } from "./Sidebar.styles.js";
+import type { Product } from "../../types/product.js";
 
+interface SidebarProps{
+  products: Product[],
+  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedRating: React.Dispatch<React.SetStateAction<number | "">>;
+  setMinPrice:React.Dispatch<React.SetStateAction<string | number>>;
+  setMaxPrice: React.Dispatch<React.SetStateAction<string | number>>;
+  maxPrice: string | number;
+  minPrice : string | number;
+  sortBy : string;
+  setSortBy: React.Dispatch<React.SetStateAction<string>>;
+  selectedPrice: number;
+  setSelectedPrice: React.Dispatch<React.SetStateAction<number>>;
+}
 const Sidebar = ({
   products,
   setSelectedCategories,
@@ -24,20 +38,20 @@ const Sidebar = ({
   setSortBy,
   selectedPrice,
   setSelectedPrice,
-}) => {
+}: SidebarProps) => {
   //categories------------------------------------------------
   //move it below
-  const getCategories = (products) => {
-    let mySet = new Set();
+  const getCategories = (products: Product[]) => {
+    let mySet = new Set<string>();
     products?.map((product) => mySet.add(product.category));
     return Array.from(mySet);
   };
   const allCategories = getCategories(products);
-  const [isChecked, setIsChecked] = useState([]);
-  const [currentRatedItem, setCurrentRatedItem] = useState("");
+  const [isChecked, setIsChecked] = useState<string[]>([]);
+  const [currentRatedItem, setCurrentRatedItem] = useState<"" | number>("");
 
-  const categoryHandler = (category) => {
-    if (!isChecked.includes(category))
+  const categoryHandler = (category : string) => {
+    if (!isChecked.includes(category ))
       setIsChecked((prev) => [...prev, category]);
     else {
       const updatedCategories = isChecked.filter((item) => item != category);
@@ -53,8 +67,8 @@ const Sidebar = ({
 
   //rating------------------------------------------------
   //get all rating
-  const getRating = (products) => {
-    let myset = new Set();
+  const getRating = (products: Product[]) => {
+    let myset = new Set<number>();
     products?.map((product) => myset.add(Math.floor(product.rating.rate)));
     return Array.from(myset);
   };
@@ -62,7 +76,7 @@ const Sidebar = ({
   //add all ratings to an array
   const allRatings = getRating(products);
   //below function handles onchange of rated products
-  const ratingHandler = (rating) => {
+  const ratingHandler = (rating : number) => {
     setCurrentRatedItem(rating);
   };
 
@@ -72,16 +86,17 @@ const Sidebar = ({
   }, [currentRatedItem]);
 
   //price ---------------------------------------------------------------------
-  const getAllPrices = (products) => {
-    let mySet = new Set();
+  const getAllPrices = (products: Product[]) => {
+    let mySet = new Set<number>();
     products?.map((product) => mySet.add(product.price));
     return Array.from(mySet);
   };
   const allPrices = getAllPrices(products);
   useEffect(() => {
+    if (allPrices.length === 0) return;
     setMinPrice(Math.min(...allPrices));
     setMaxPrice(Math.max(...allPrices));
-  }, [products]);
+  }, [products,setMinPrice, setMaxPrice]);
 
   const clearFilters = () => {
     setSelectedCategories([]);
@@ -93,7 +108,7 @@ const Sidebar = ({
     setCurrentRatedItem("");
   };
 
-  const removeSelectedCategoryHandler = (selectedCategory) => {
+  const removeSelectedCategoryHandler = (selectedCategory : string) => {
     console.log("click");
     const updatedCategory = isChecked?.filter(
       (category) => category !== selectedCategory,
@@ -105,7 +120,7 @@ const Sidebar = ({
       <SortContainer>
         {/* <SortLabel htmlFor="sort-products">Sort By:</SortLabel> */}
         <SidebarTitle>Sort By:</SidebarTitle>
-        <SortSelect value={sortBy} onChange={(e) => setSortBy(e.target.value)}>
+        <SortSelect value={sortBy} onChange={(e : React.ChangeEvent<HTMLSelectElement>) => setSortBy(e.target.value)}>
           <option value="">Default</option>
           <option value="price-low-high">Price: Low to High</option>
           <option value="price-high-low">Price: High to Low</option>
@@ -168,7 +183,7 @@ const Sidebar = ({
           min={minPrice}
           max={maxPrice}
           value={selectedPrice}
-          onChange={(e) => setSelectedPrice(e.target.value)}
+          onChange={(e) => setSelectedPrice(Number(e.target.value))}
         />
         <PriceLabels>
           <span>${minPrice}</span>
@@ -183,3 +198,4 @@ const Sidebar = ({
 };
 
 export default Sidebar;
+ 

@@ -14,14 +14,14 @@ const Products = ({products } : {products: Product[]}) => {
   const themeContext = useContext(ThemeContext);
   if (!themeContext) {
   throw new Error("Products must be used inside ThemeProvider");
-}
+} 
   const {theme} = themeContext;
   const wishlistedProducts = useSelector((state : RootState) => state.wishlist);
   const cartProduct = useSelector((state : RootState) => state.cart);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]); 
-  const [selectedRating, setSelectedRating] = useState("");
-  const [minPrice, setMinPrice] = useState<string>("");
-  const [maxPrice, setMaxPrice] = useState<string>("");
+  const [selectedRating, setSelectedRating] = useState<number | "">("");
+  const [minPrice, setMinPrice] = useState<string | number>("");
+  const [maxPrice, setMaxPrice] = useState<string | number>("");
   const [selectedPrice, setSelectedPrice] = useState<number>(0);
   const [sortBy, setSortBy] = useState<string>("");
 
