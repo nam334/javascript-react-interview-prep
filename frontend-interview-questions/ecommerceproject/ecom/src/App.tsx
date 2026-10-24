@@ -1,6 +1,5 @@
-import "./App.css";
-import Home from "./components/Home/Home";
-import { ThemeProvider } from "./context/ThemeContext";
+import Home from "./components/Home/Home.js";
+import { ThemeProvider } from "./context/ThemeContext.js";
 
 function App() {
   return (

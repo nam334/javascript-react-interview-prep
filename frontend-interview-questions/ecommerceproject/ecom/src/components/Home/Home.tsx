@@ -1,6 +1,6 @@
-import Navbar from "../Navbar/Navbar";
-import Products from "../Products/Products";
-import { useFetch } from "../../hooks/useFetch.ts";
+import Navbar from "../Navbar/Navbar.js";
+import Products from "../Products/Products.js";
+import { useFetch } from "../../hooks/useFetch.js";
 
 const Home = () => {
   const { loading, error, products } = useFetch();

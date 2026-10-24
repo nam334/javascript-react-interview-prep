@@ -19,7 +19,7 @@ import { useDispatch } from "react-redux";
 import type { CartItem, Product } from "../../types/product.js";
 import type { decreaseQuantity } from "../../store/cartSlice.js";
 
-interface ProductItemProps {
+export interface ProductItemProps {
   product: Product;
   cartProduct: CartItem[];
   theme: string ;
@@ -28,7 +28,7 @@ interface ProductItemProps {
   addToCartHandler: (product: Product)=> void;
   decreaseQuantity: typeof decreaseQuantity
 }
-
+ 
 
 const ProductItem = ({
   product,

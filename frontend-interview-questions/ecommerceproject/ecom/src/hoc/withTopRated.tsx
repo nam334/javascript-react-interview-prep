@@ -1,5 +1,6 @@
-import ProductItem from "../components/Products/ProductItem";
-import styled from "styled-components";
+import type { ComponentType } from "react";
+import ProductItem, { type ProductItemProps } from "../components/Products/ProductItem.js";
+import {styled} from "styled-components";
 export const TopRatedWrapper = styled.div`
   position: relative;
 `;
@@ -21,8 +22,8 @@ export const TopRatedBadge = styled.span`
   border: 1px solid #f2d7a0;
 `;
 
-function withTopRated(WrappedComponent) {
-  return function EnhancedWrappedComponent(props) {
+function withTopRated(WrappedComponent : ComponentType<ProductItemProps>) {
+  return function EnhancedWrappedComponent(props: ProductItemProps) {
     const isTopRated = props.product.rating.rate >= 4;
     return (
       <>

@@ -5,17 +5,21 @@ import {
   CartButton,
   SideDiv,
   ThemeButton,
-} from "./Navbar.styles";
+} from "./Navbar.styles.js";
 import { FiShoppingCart } from "react-icons/fi";
 import { IoSunny } from "react-icons/io5";
 import { MdDarkMode } from "react-icons/md";
-import { ThemeContext } from "../../context/ThemeContext";
+import { ThemeContext } from "../../context/ThemeContext.js";
 import { useSelector } from "react-redux";
-import { getTotalCartItems } from "../../utils/utils";
+import { getTotalCartItems } from "../../utils/utils.js";
+import type { RootState } from "../../store/store.js";
 
-const Navbar = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const cartProduct = useSelector((state) => state.cart);
+const Navbar = () => { 
+  const themeContext = useContext(ThemeContext)
+  if(!themeContext)
+    throw new Error("Navbar must be used inside ThemeProvider");
+  const { theme, toggleTheme } = themeContext;
+  const cartProduct = useSelector((state: RootState) => state.cart);
   let { totalQuantity = 0, totalPrice = 0 } = getTotalCartItems(cartProduct);
   return (
     <>
