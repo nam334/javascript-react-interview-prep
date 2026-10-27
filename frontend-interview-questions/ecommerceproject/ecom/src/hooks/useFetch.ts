@@ -12,7 +12,7 @@ export const useFetch = () => {
       try {
         setLoading(true);
         const response = await fetch(API_ENDPOINT);
-        if (!response.ok) {
+        if (!response.ok) { 
   throw new Error(`HTTP Error: ${response.status}`);
 }
         const result : Product[] = await response.json();

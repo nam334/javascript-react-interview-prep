@@ -11,6 +11,7 @@ import {
   SortSelect,
 } from "./Sidebar.styles.js";
 import type { Product } from "../../types/product.js";
+import { useProductFilters } from "../../hooks/useProductFilters.js";
 
 interface SidebarProps{
   products: Product[];
@@ -41,24 +42,15 @@ const Sidebar = ({
   setSortBy,
   selectedPrice,
 }: SidebarProps) => {
+  const {getCategories, getRating} = useProductFilters()
   //categories------------------------------------------------
 
-  const getCategories = (products: Product[]) => {
-    let mySet = new Set<string>();
-    products?.map((product) => mySet.add(product.category));
-    return Array.from(mySet);
-  }; 
    const allCategories = getCategories(products);
 
   
   //rating------------------------------------------------
   //get all rating
-  const getRating = (products: Product[]) => {
-    let myset = new Set<number>();
-    products?.map((product) => myset.add(Math.floor(product.rating.rate)));
-    return Array.from(myset);
-  };
-
+  
   //add all ratings to an array
   const allRatings = getRating(products);
   //below function handles onchange of rated products

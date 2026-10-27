@@ -8,7 +8,7 @@ import { EnhancedProductItem } from "../../hoc/withTopRated.jsx";
 import Sidebar from "../Sidebar/Sidebar.jsx";
 import type { CartItem, Product } from "../../types/product.js"; 
 import type { RootState } from "../../store/store.js";
-
+import { useProductFilters } from "../../hooks/useProductFilters.js";
 
 const Products = ({products } : {products: Product[]}) => {
   const themeContext = useContext(ThemeContext);
@@ -24,10 +24,7 @@ const Products = ({products } : {products: Product[]}) => {
   const [sortBy, setSortBy] = useState<string>("");
 
   const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   setSelectedPrice(Number(maxPrice)); 
-  // }, [maxPrice]);
+  const {getAllPrices} = useProductFilters()
 
   const wishlistHandler = (id : number) => {
     dispatch(toggleWishlist(id));
@@ -59,12 +56,6 @@ const ratingHandler = (rating : number) => {
   setSelectedPrice(price)
 };
 
-const getAllPrices = (products: Product[]) => {
-    let mySet = new Set<number>();
-    products?.map((product) => mySet.add(product.price));
-    return Array.from(mySet);
-  };
-
   const allPrices = getAllPrices(products)
   const minPrice = allPrices.length > 0 ? Math.min(...allPrices): 0
   const maxPrice =  allPrices.length > 0 ? Math.max(...allPrices) : 0
@@ -72,7 +63,7 @@ const getAllPrices = (products: Product[]) => {
   const clearFiltersHandler = () => {
     setSelectedCategories([])
     setSelectedRating("")
-     setSelectedPrice(0);
+    setSelectedPrice(0);
   }
 
   const finalFilteredProducts = products.filter((product) => {
