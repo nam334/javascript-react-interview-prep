@@ -20,16 +20,14 @@ const Products = ({products } : {products: Product[]}) => {
   const cartProduct = useSelector((state : RootState) => state.cart);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]); 
   const [selectedRating, setSelectedRating] = useState<number | "">("");
-  const [minPrice, setMinPrice] = useState<string | number>("");
-  const [maxPrice, setMaxPrice] = useState<string | number>("");
   const [selectedPrice, setSelectedPrice] = useState<number>(0);
   const [sortBy, setSortBy] = useState<string>("");
 
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    setSelectedPrice(Number(maxPrice));
-  }, [maxPrice]);
+  // useEffect(() => {
+  //   setSelectedPrice(Number(maxPrice)); 
+  // }, [maxPrice]);
 
   const wishlistHandler = (id : number) => {
     dispatch(toggleWishlist(id));
@@ -37,15 +35,46 @@ const Products = ({products } : {products: Product[]}) => {
 
   const addToCartHandler = (product : Product) => {
     dispatch(addToCart(product));
+  }; 
+
+  const categoryHandler = (currentCategory: string) => {
+    const currEl = selectedCategories.find(category => category === currentCategory)
+    if(currEl)
+     {
+      //remove it 
+      const updatedCategories = selectedCategories.filter(category => category !== currentCategory)
+       setSelectedCategories(updatedCategories)
+     }
+     else{
+      //add it 
+      setSelectedCategories(prev => [...prev, currentCategory])
+     }
+  }
+const ratingHandler = (rating : number) => {
+    setSelectedRating(rating);
   };
 
-  // const fetchFilteredProducts = products?.filter((product) =>
-  //   selectedCategories.includes(product.category),
-  // );
+  const priceHandler = (price: number) => {
+  // Your logic
+  setSelectedPrice(price)
+};
 
-  // const fetchRatedProducts = products?.filter(
-  //   (product) => product.rating.rate > selectedRating,
-  // );
+const getAllPrices = (products: Product[]) => {
+    let mySet = new Set<number>();
+    products?.map((product) => mySet.add(product.price));
+    return Array.from(mySet);
+  };
+
+  const allPrices = getAllPrices(products)
+  const minPrice = allPrices.length > 0 ? Math.min(...allPrices): 0
+  const maxPrice =  allPrices.length > 0 ? Math.max(...allPrices) : 0
+
+  const clearFiltersHandler = () => {
+    setSelectedCategories([])
+    setSelectedRating("")
+     setSelectedPrice(0);
+  }
+
   const finalFilteredProducts = products.filter((product) => {
     let matchesCategory = selectedCategories.includes(product.category);
     let matchesRating = product.rating.rate > Number(selectedRating);
@@ -68,14 +97,15 @@ const Products = ({products } : {products: Product[]}) => {
       <Wrapper>
         <Sidebar
           products={products}
-          setSelectedCategories={setSelectedCategories}
-          setSelectedRating={setSelectedRating}
-          setMinPrice={setMinPrice}
-          setMaxPrice={setMaxPrice}
+          selectedCategories={selectedCategories}
+          selectedRating={selectedRating}
+          clearFiltersHandler={clearFiltersHandler}
+          categoryHandler = {categoryHandler}
+          ratingHandler={ratingHandler}
+          priceHandler={priceHandler}
           minPrice={minPrice}
           maxPrice={maxPrice}
           selectedPrice={selectedPrice}
-          setSelectedPrice={setSelectedPrice}
           sortBy={sortBy}
           setSortBy={setSortBy}
         />

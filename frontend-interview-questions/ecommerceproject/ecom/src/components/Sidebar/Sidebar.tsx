@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import {
   ClearFiltersButton,
@@ -14,57 +13,44 @@ import {
 import type { Product } from "../../types/product.js";
 
 interface SidebarProps{
-  products: Product[],
-  setSelectedCategories: React.Dispatch<React.SetStateAction<string[]>>;
-  setSelectedRating: React.Dispatch<React.SetStateAction<number | "">>;
-  setMinPrice:React.Dispatch<React.SetStateAction<string | number>>;
-  setMaxPrice: React.Dispatch<React.SetStateAction<string | number>>;
+  products: Product[];
+  selectedCategories: string[];
+  categoryHandler : (currentCategory : string) => void;
+  selectedRating: number | "";
+  ratingHandler:(rating: number) => void;
+  priceHandler:(price: number) => void;
+ clearFiltersHandler: () => void;
   maxPrice: string | number;
   minPrice : string | number;
   sortBy : string;
   setSortBy: React.Dispatch<React.SetStateAction<string>>;
   selectedPrice: number;
-  setSelectedPrice: React.Dispatch<React.SetStateAction<number>>;
+ 
 }
 const Sidebar = ({
   products,
-  setSelectedCategories,
-  setSelectedRating,
-  setMinPrice,
-  setMaxPrice,
+  selectedCategories,
+  selectedRating,
+  ratingHandler,
+  priceHandler,
+ clearFiltersHandler,
+  categoryHandler,
   maxPrice,
   minPrice,
   sortBy,
   setSortBy,
   selectedPrice,
-  setSelectedPrice,
 }: SidebarProps) => {
   //categories------------------------------------------------
-  //move it below
+
   const getCategories = (products: Product[]) => {
     let mySet = new Set<string>();
     products?.map((product) => mySet.add(product.category));
     return Array.from(mySet);
-  };
-  const allCategories = getCategories(products);
-  const [isChecked, setIsChecked] = useState<string[]>([]);
-  const [currentRatedItem, setCurrentRatedItem] = useState<"" | number>("");
+  }; 
+   const allCategories = getCategories(products);
 
-  const categoryHandler = (category : string) => {
-    if (!isChecked.includes(category ))
-      setIsChecked((prev) => [...prev, category]);
-    else {
-      const updatedCategories = isChecked.filter((item) => item != category);
-      setIsChecked(updatedCategories);
-    }
-  };
-
-  console.log(allCategories);
-
-  useEffect(() => {
-    setSelectedCategories(isChecked);
-  }, [isChecked]);
-
+  
   //rating------------------------------------------------
   //get all rating
   const getRating = (products: Product[]) => {
@@ -76,45 +62,12 @@ const Sidebar = ({
   //add all ratings to an array
   const allRatings = getRating(products);
   //below function handles onchange of rated products
-  const ratingHandler = (rating : number) => {
-    setCurrentRatedItem(rating);
-  };
-
-  //sending selceted ratings to the product
-  useEffect(() => {
-    setSelectedRating(currentRatedItem);
-  }, [currentRatedItem]);
-
+  
+ 
   //price ---------------------------------------------------------------------
-  const getAllPrices = (products: Product[]) => {
-    let mySet = new Set<number>();
-    products?.map((product) => mySet.add(product.price));
-    return Array.from(mySet);
-  };
-  const allPrices = getAllPrices(products);
-  useEffect(() => {
-    if (allPrices.length === 0) return;
-    setMinPrice(Math.min(...allPrices));
-    setMaxPrice(Math.max(...allPrices));
-  }, [products,setMinPrice, setMaxPrice]);
+  
 
-  const clearFilters = () => {
-    setSelectedCategories([]);
-    setSelectedRating("");
-    setMinPrice("");
-    setMaxPrice("");
-    setSelectedPrice(0);
-    setIsChecked([]);
-    setCurrentRatedItem("");
-  };
-
-  const removeSelectedCategoryHandler = (selectedCategory : string) => {
-    console.log("click");
-    const updatedCategory = isChecked?.filter(
-      (category) => category !== selectedCategory,
-    );
-    setIsChecked(updatedCategory);
-  };
+  
   return (
     <SidebarDiv>
       <SortContainer>
@@ -129,16 +82,16 @@ const Sidebar = ({
       </SortContainer>
       <SidebarTitle>Filters</SidebarTitle>
 
-      {isChecked?.map((category) => (
+      {selectedCategories?.map((category: string) => (
         <div>
           <FilterChip>
-            <RxCross2 onClick={() => removeSelectedCategoryHandler(category)} />{" "}
+            <RxCross2 onClick={() => categoryHandler(category)} />{" "}
             {category}
           </FilterChip>
         </div>
       ))}
 
-      <ClearFiltersButton type="button" onClick={clearFilters}>
+      <ClearFiltersButton type="button" onClick={clearFiltersHandler}>
         Clear all
       </ClearFiltersButton>
       <FilterSection>
@@ -148,7 +101,7 @@ const Sidebar = ({
             <label>
               <input
                 type="checkbox"
-                checked={isChecked.includes(category)}
+                checked={selectedCategories.includes(category)}
                 onChange={() => categoryHandler(category)}
               />
               {category}
@@ -164,7 +117,7 @@ const Sidebar = ({
               <input
                 type="radio"
                 name="product rating"
-                checked={currentRatedItem === rating}
+                checked={selectedRating === rating}
                 value={rating}
                 onChange={() => ratingHandler(rating)}
               />
@@ -182,8 +135,8 @@ const Sidebar = ({
           id="price"
           min={minPrice}
           max={maxPrice}
-          value={selectedPrice}
-          onChange={(e) => setSelectedPrice(Number(e.target.value))}
+          value={selectedPrice === 0 ? maxPrice : selectedPrice}
+          onChange={(e) => priceHandler(Number(e.target.value))}
         />
         <PriceLabels>
           <span>${minPrice}</span>
