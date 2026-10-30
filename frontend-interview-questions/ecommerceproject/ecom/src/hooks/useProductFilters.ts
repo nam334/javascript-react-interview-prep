@@ -23,4 +23,4 @@ export const useProductFilters = () => {
 
 
       return {getCategories, getRating, getAllPrices}
-}
+} 

@@ -64,6 +64,7 @@ const Sidebar = ({
     <SidebarDiv>
       <SortContainer>
         {/* <SortLabel htmlFor="sort-products">Sort By:</SortLabel> */}
+        {/* array of obj */}
         <SidebarTitle>Sort By:</SidebarTitle>
         <SortSelect value={sortBy} onChange={(e : React.ChangeEvent<HTMLSelectElement>) => setSortBy(e.target.value)}>
           <option value="">Default</option>
