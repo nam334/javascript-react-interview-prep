@@ -13,7 +13,7 @@ const cartSlice = createSlice({
       const newProduct = action.payload;
       const isProductPresent = state.filter(
         (product) => product.id === action.payload.id,
-      );
+      ); 
       if (isProductPresent?.length > 0) {
         //product is present, update quantity
         return state.map((product) => {
