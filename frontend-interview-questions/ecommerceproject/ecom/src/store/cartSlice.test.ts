@@ -45,7 +45,7 @@
                     },
                     qty:1
                     }]
-
+ 
                     const product : Product = {        
                     id: 1,
                     title: "Product A",
