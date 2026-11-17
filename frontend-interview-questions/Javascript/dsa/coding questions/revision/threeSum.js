@@ -26,25 +26,52 @@
 
 //better solution
 
+// function threeSum(arr) {
+//   let n = arr.length,
+//     res = [];
+//   let chkset = new Set();
+//   for (let i = 0; i < n; i++) {
+//     const myset = new Set();
+//     for (let j = i + 1; j < n; j++) {
+//       let k = 0 - (arr[i] + arr[j]);
+//       if (myset.has(k)) {
+//         let ans = [arr[i], arr[j], k];
+//         ans.sort((a, b) => a - b);
+//         let key = `${ans}`;
+//         if (!chkset.has(key)) res.push(ans);
+//         chkset.add(key);
+//       }
+//       myset.add(arr[j]);
+//     }
+//   }
+//   return res;
+// }
+
+//optimised solution
+
 function threeSum(arr) {
   let n = arr.length,
-    res = [];
-  let chkset = new Set();
+    ans = [];
+  arr = arr.sort((a, b) => a - b);
   for (let i = 0; i < n; i++) {
-    const myset = new Set();
-    for (let j = i + 1; j < n; j++) {
-      let k = 0 - (arr[i] + arr[j]);
-      if (myset.has(k)) {
-        let ans = [arr[i], arr[j], k];
-        ans.sort((a, b) => a - b);
-        let key = `${ans}`;
-        if (!chkset.has(key)) res.push(ans);
-        chkset.add(key);
+    if (i > 0 && arr[i] === arr[i - 1]) continue;
+    let j = i + 1,
+      k = n - 1;
+    while (j < k) {
+      let sum = arr[i] + arr[j] + arr[k];
+      if (sum < 0) j++;
+      else if (sum > 0) k--;
+      else {
+        let temp = [arr[i], arr[j], arr[k]];
+        ans.push(temp);
+        j++;
+        k--;
+        while (j < k && arr[j] === arr[j - 1]) j++;
+        while (j < k && arr[k] == arr[k + 1]) k--;
       }
-      myset.add(arr[j]);
     }
   }
-  return res;
+  return ans;
 }
 
 console.log(threeSum([-1, 0, 1, 2, -1, -4])); // [[-1, -1, 2], [-1, 0, 1]]
