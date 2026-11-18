@@ -105,7 +105,7 @@
             description: "Product A description",
             category: "", 
             image: "" ,
-            rating :{
+            rating :{ 
                 rate: 4 ,
                 count: 1
             },

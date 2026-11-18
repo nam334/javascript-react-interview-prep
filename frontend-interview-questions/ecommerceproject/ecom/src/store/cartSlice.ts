@@ -4,7 +4,7 @@ import type { CartItem, Product } from "../types/product.js";
 const initialState: CartItem[] = [];
 
 const cartSlice = createSlice({
-  name: "cart",
+  name: "cart", 
   initialState,
   reducers: {
     addToCart(state, action : PayloadAction<Product>) {
@@ -53,13 +53,13 @@ const cartSlice = createSlice({
         });
       }
     },
-    deleteFromCart(state, action : PayloadAction<number>) {
-      //it will take id as input
-      return state.filter((product) => product.id !== action.payload);
-    },
+    // deleteFromCart(state, action : PayloadAction<number>) {
+    //   //it will take id as input
+    //   return state.filter((product) => product.id !== action.payload);
+    // },
   },
 });
 
-export const { addToCart, deleteFromCart, decreaseQuantity } =
+export const { addToCart, decreaseQuantity } =
   cartSlice.actions;
 export default cartSlice.reducer;
