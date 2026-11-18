@@ -26,19 +26,20 @@ export interface ProductItemProps {
   wishlistedProducts: number[];
   wishlistHandler: (id: number) =>void ;
   addToCartHandler: (product: Product)=> void;
-  decreaseQuantity: typeof decreaseQuantity
+   decreaseQuantityHandler: (id: number) => void
 }
  
-
+ 
 const ProductItem = ({
-  product,
+  product, 
   cartProduct,
   theme,
 
   wishlistedProducts,
   wishlistHandler,
   addToCartHandler,
-  decreaseQuantity,
+  decreaseQuantityHandler,
+ 
 }: ProductItemProps) => {
   const cartItem = cartProduct.find((item) => item.id === product.id);
   const dispatch = useDispatch();
@@ -84,7 +85,7 @@ const ProductItem = ({
               disabled={cartItem.qty === 0}
               type="button"
               aria-label={`Remove one ${product.title}`}
-              onClick={() => dispatch(decreaseQuantity(product.id))}
+              onClick={() => decreaseQuantityHandler(product.id)}
             >
               <CiCircleMinus aria-hidden="true" />
             </QuantityButton>

@@ -24,7 +24,7 @@ const Products = ({products } : {products: Product[]}) => {
   const [sortBy, setSortBy] = useState<string>("");
 
   const dispatch = useDispatch();
-  const {getAllPrices} = useProductFilters()
+  const {getAllPrices} = useProductFilters() 
 
   const wishlistHandler = (id : number) => {
     dispatch(toggleWishlist(id));
@@ -34,6 +34,7 @@ const Products = ({products } : {products: Product[]}) => {
     dispatch(addToCart(product));
   }; 
 
+  const decreaseQuantityHandler = (id: number) => dispatch(decreaseQuantity(id))
   const categoryHandler = (currentCategory: string) => {
     const currEl = selectedCategories.find(category => category === currentCategory)
     if(currEl)
@@ -111,7 +112,8 @@ const ratingHandler = (rating : number) => {
                   wishlistedProducts={wishlistedProducts}
                   wishlistHandler={wishlistHandler}
                   addToCartHandler={addToCartHandler}
-                  decreaseQuantity={decreaseQuantity}
+                  decreaseQuantityHandler={decreaseQuantityHandler}
+                  
                 />
               );
             })
